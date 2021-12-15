@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragment.LoginFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dosis_bold"
+                android:text="Silahkan masuk :)"
+                android:textColor="@color/fontColor"
+                android:textSize="36sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/dosis_light"
+                android:paddingRight="50dp"
+                android:text="Kalo udah masuk kamu bisa nikmatin semua fitur yang ada di aplkasi loh! Banyak juga konten dan cerita menarik yang bisa kamu baca :D"
+                android:textColor="@color/fontColorSecondary"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="40dp">
+
+                <EditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/layouting"
+                    android:fontFamily="@font/dosis_regular"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/background_label"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="Email"
+                    android:textColor="#1b1b1b"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginTop="12dp">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/layouting"
+                    android:fontFamily="@font/dosis_regular"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/background_label"
+                    android:fontFamily="@font/dosis_semibold"
+                    android:text="Password"
+                    android:textColor="#1b1b1b"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_action"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="40dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/mainColor"
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/btn_loading"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="20dp"
+                        android:layout_toStartOf="@+id/btn_label"
+                        android:indeterminateDrawable="@drawable/progress"
+                        android:indeterminateDuration="1000"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/btn_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/dosis_bold"
+                        android:text="Masuk"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?android:attr/selectableItemBackground"
+                    tools:targetApi="lollipop" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

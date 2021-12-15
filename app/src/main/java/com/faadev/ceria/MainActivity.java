@@ -1,5 +1,6 @@
 package com.faadev.ceria;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.faadev.ceria.fragment.DisukaiFragment;
 import com.faadev.ceria.fragment.PopularFragment;
 import com.faadev.ceria.fragment.TerbaruFragment;
 import com.faadev.ceria.model.CategoryModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private List<CategoryModel> cmod;
     private ItemCLickListener itemCLickListener;
     private String category = "";
+    private FloatingActionButton fabAdd;
 
 
     @Override
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         nav_view = findViewById(R.id.nav_drawer);
         menu = findViewById(R.id.menu_btn);
         rv_category = findViewById(R.id.rv_category);
+        fabAdd = findViewById(R.id.fab_add);
     }
 
     private void _prep(){
@@ -160,5 +164,9 @@ public class MainActivity extends AppCompatActivity {
         categoryAdapter = new CategoryAdapter(this, cmod, itemCLickListener);
         rv_category.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rv_category.setAdapter(categoryAdapter);
+
+        fabAdd.setOnClickListener(v -> {
+            startActivity(new Intent(this, AuthActivity.class));
+        });
     }
 }

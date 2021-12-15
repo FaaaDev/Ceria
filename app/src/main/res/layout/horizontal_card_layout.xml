@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="This is the title of content"
         android:fontFamily="@font/dosis_semibold"
-        android:textColor="#000000"
+        android:textColor="@color/fontColor"
         android:textSize="16sp"
         android:layout_marginTop="8dp"
         android:maxLines="1"
@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:text="Writer"
         android:fontFamily="@font/dosis_regular"
+        android:textColor="@color/fontColorSecondary"
         android:textSize="12sp"
         android:maxLines="1"
         android:ellipsize="end"/>
@@ -43,11 +44,11 @@
             android:layout_height="wrap_content"
             android:text="100"
             android:fontFamily="@font/dosis_semibold"
-            android:textColor="#000000"
+            android:textColor="@color/fontColor"
             android:textSize="12sp"
             android:maxLines="1"
             android:ellipsize="end"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
             android:layout_width="14dp"

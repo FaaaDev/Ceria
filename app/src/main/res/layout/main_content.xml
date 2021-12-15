@@ -8,6 +8,7 @@
     android:id="@+id/container">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -139,16 +140,20 @@
                     android:background="#ffffff"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_category"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="12dp"
+                        android:layout_marginTop="24dp"
                         android:clipToPadding="false"
                         android:paddingStart="18dp"
                         android:paddingEnd="18dp"
-                        android:layout_marginTop="24dp"
-                        android:scrollbars="none"/>
+                        android:scrollbars="none"
+                        tools:listitem="@layout/layout_category"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="horizontal"/>
                 </LinearLayout>
 
             </com.google.android.material.appbar.AppBarLayout>
@@ -157,5 +162,19 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="35dp"
+        android:backgroundTint="#fff"
+        android:src="@drawable/ic_round_add_24"
+        app:borderWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:targetApi="lollipop"
+        app:elevation="15dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
