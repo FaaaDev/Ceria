@@ -1,4 +1,4 @@
-package com.faadev.ceria.fragment;
+package com.faadev.ceria.screen.fragment;
 
 import android.os.Bundle;
 

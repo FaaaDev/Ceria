@@ -1,4 +1,4 @@
-package com.faadev.ceria.fragment;
+package com.faadev.ceria.screen.fragment;
 
 import android.os.Bundle;
 
@@ -10,14 +10,13 @@ import android.view.ViewGroup;
 
 import com.faadev.ceria.R;
 
-public class PopularFragment extends Fragment {
+public class DisimpanFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_popular, container, false);
-
-        return root;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_disimpan, container, false);
     }
 
     private void _init(View root){

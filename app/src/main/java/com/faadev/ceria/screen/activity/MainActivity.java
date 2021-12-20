@@ -1,4 +1,4 @@
-package com.faadev.ceria;
+package com.faadev.ceria.screen.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,14 +8,16 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.CategoryAdapter;
 import com.faadev.ceria.adapter.ItemCLickListener;
 import com.faadev.ceria.adapter.TabAdapter;
-import com.faadev.ceria.fragment.DisimpanFragment;
-import com.faadev.ceria.fragment.DisukaiFragment;
-import com.faadev.ceria.fragment.PopularFragment;
-import com.faadev.ceria.fragment.TerbaruFragment;
+import com.faadev.ceria.screen.fragment.DisimpanFragment;
+import com.faadev.ceria.screen.fragment.DisukaiFragment;
+import com.faadev.ceria.screen.fragment.PopularFragment;
+import com.faadev.ceria.screen.fragment.TerbaruFragment;
 import com.faadev.ceria.model.CategoryModel;
+import com.faadev.ceria.utils.LoginRequired;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -166,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         rv_category.setAdapter(categoryAdapter);
 
         fabAdd.setOnClickListener(v -> {
-            startActivity(new Intent(this, AuthActivity.class));
+            LoginRequired.start(this, new Intent(this, CreatePostActivity.class));
         });
     }
 }

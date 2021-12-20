@@ -1,6 +1,15 @@
 package com.faadev.ceria.model;
 
-public class CategoryModel {
+import android.os.Parcelable;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class CategoryModel implements Serializable {
+    @SerializedName("id")
+    private int id;
+    @SerializedName("category_name")
     private String category;
     private boolean selected = false;
 
@@ -23,5 +32,13 @@ public class CategoryModel {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

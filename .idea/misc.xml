@@ -12,19 +12,31 @@
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/category_selected.xml" value="0.2078125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/category_unselected.xml" value="0.2078125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/circular_progress.xml" value="0.14" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic__error.xml" value="0.13125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_login_ilustration.xml" value="0.2078125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_add_24.xml" value="0.10208333333333333" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_check_circle_24.xml" value="0.1" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_close_24.xml" value="0.1" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_image_24.xml" value="0.13125" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_uncheck_circle_24.xml" value="0.1" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_storage.xml" value="0.13125" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/image_container.xml" value="0.13125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/layouting.xml" value="0.17051282051282052" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/progress.xml" value="0.13125" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/slider_indicator.xml" value="0.13125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/tab_indicator.xml" value="0.2078125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout-v21/main_content.xml" value="0.16259057971014493" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_auth.xml" value="0.10621584699453553" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_create_post.xml" value="0.19" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_main.xml" value="0.14479166666666668" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/content_scrolling.xml" value="0.16259057971014493" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/fragment_category.xml" value="0.18" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/fragment_error.xml" value="0.2" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/fragment_login.xml" value="0.11475409836065574" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/fragment_register.xml" value="0.11475409836065574" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/horizontal_card_layout.xml" value="0.33" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/item_category_vertical.xml" value="0.22" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/layout_category.xml" value="0.16259057971014493" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/loading_layout.xml" value="0.25" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/main_content.xml" value="0.2" />

@@ -1,4 +1,4 @@
-package com.faadev.ceria;
+package com.faadev.ceria.screen.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,13 +7,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.TabAdapter;
 import com.faadev.ceria.databinding.ActivityAuthBinding;
-import com.faadev.ceria.fragment.DisukaiFragment;
-import com.faadev.ceria.fragment.LoginFragment;
-import com.faadev.ceria.fragment.PopularFragment;
-import com.faadev.ceria.fragment.RegisterFragment;
-import com.faadev.ceria.fragment.TerbaruFragment;
+import com.faadev.ceria.screen.fragment.LoginFragment;
+import com.faadev.ceria.screen.fragment.RegisterFragment;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -48,8 +46,9 @@ public class AuthActivity extends AppCompatActivity {
         adapter.addFragment(new RegisterFragment(), "Daftar");
         binding.vp.setAdapter(adapter);
         binding.tab.setupWithViewPager(binding.vp);
-
-
+        binding.close.setOnClickListener(v -> {
+            finish();
+        });
     }
 
 }

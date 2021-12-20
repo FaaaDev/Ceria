@@ -1,4 +1,4 @@
-package com.faadev.ceria.ui.notifications;
+package com.faadev.ceria.screen.ui.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

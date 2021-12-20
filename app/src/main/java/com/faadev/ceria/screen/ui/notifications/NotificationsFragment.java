@@ -1,4 +1,4 @@
-package com.faadev.ceria.ui.notifications;
+package com.faadev.ceria.screen.ui.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

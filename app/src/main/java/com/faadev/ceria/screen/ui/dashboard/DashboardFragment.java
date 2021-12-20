@@ -1,4 +1,4 @@
-package com.faadev.ceria.ui.dashboard;
+package com.faadev.ceria.screen.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
