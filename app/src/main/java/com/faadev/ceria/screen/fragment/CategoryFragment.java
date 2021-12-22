@@ -1,5 +1,7 @@
 package com.faadev.ceria.screen.fragment;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +17,7 @@ import com.faadev.ceria.adapter.CategoryAdapter;
 import com.faadev.ceria.adapter.ItemCLickListener;
 import com.faadev.ceria.databinding.FragmentCategoryBinding;
 import com.faadev.ceria.model.CategoryModel;
+import com.faadev.ceria.utils.DismissListener;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
@@ -26,7 +29,8 @@ public class CategoryFragment extends BottomSheetDialogFragment {
     private CategoryAdapter adapter;
     private List<CategoryModel> list = new ArrayList<>();
     private ItemCLickListener itemCLickListener;
-    private int category;
+    private String category;
+    private DismissListener listener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,10 +54,30 @@ public class CategoryFragment extends BottomSheetDialogFragment {
             list = (List<CategoryModel>) getArguments().getSerializable("data");
         }
 
-        itemCLickListener = param -> category = Integer.parseInt(param);
+        itemCLickListener = param -> {
+            category = param;
+            dismiss();
+        };
 
         adapter = new CategoryAdapter(getContext(), list, itemCLickListener, true);
         binding.rvCategory.setAdapter(adapter);
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        try {
+            listener = (DismissListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "Must implement this");
+        }
+
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        listener.onDismissSheet(category);
+    }
 }

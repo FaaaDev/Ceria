@@ -18,6 +18,9 @@ public class CategoryModel implements Serializable {
         this.selected = selected;
     }
 
+    public CategoryModel() {
+    }
+
     public String getCategory() {
         return category;
     }
