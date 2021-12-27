@@ -18,11 +18,13 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.databinding.ActivityCreatePostBinding;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.CategoryResponse;
+import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.model.CategoryModel;
 import com.faadev.ceria.screen.fragment.CategoryFragment;
 import com.faadev.ceria.utils.DismissListener;
@@ -43,11 +45,12 @@ import retrofit2.Response;
 public class CreatePostActivity extends AppCompatActivity implements DismissListener {
 
     private ActivityCreatePostBinding binding;
-    private ApiService apiService = new ApiService();
+    private ApiService apiService;
     private List<CategoryModel> categoryModelList;
     private CategoryModel categoryModel = new CategoryModel();
     private String cameraFilePath;
     private Uri uri;
+    private int categoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +68,14 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
             main.setSystemUiVisibility(flags);
             this.getWindow().setStatusBarColor(Color.argb(255, 0, 0, 23));
         }
-
+        apiService = new ApiService(this);
         implement();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        apiService = new ApiService(this);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -84,6 +93,7 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
         });
 
         binding.btnAction.setOnClickListener(v -> {
+            addPost();
         });
 
         binding.category.setOnClickListener(v -> {
@@ -97,6 +107,14 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
         binding.close.setOnClickListener(v -> finish());
 
         binding.pickImage.setOnClickListener(v -> ShowDialog.showPicker(getSupportFragmentManager()));
+    }
+
+    private void setLoading(boolean loading) {
+        if (loading) {
+            binding.btnLoading.setVisibility(View.VISIBLE);
+        } else {
+            binding.btnLoading.setVisibility(View.GONE);
+        }
     }
 
     private void getCategory() {
@@ -116,6 +134,37 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
                 ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
             }
         });
+    }
+
+    private void addPost(){
+        binding.btnAction.setEnabled(false);
+        setLoading(true);
+        apiService.addPost(
+                binding.tittle.getText().toString(),
+                binding.content.getText().toString(),
+                "",
+                categoryId,
+                new Callback<GeneralResponse>() {
+                    @Override
+                    public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        if (response.isSuccessful()){
+                            Toast.makeText(getApplicationContext(), "Postingan berhasil dibuat!", Toast.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            ShowDialog.showError(getSupportFragmentManager(), response.code(), "Error " + response.code() + "-Gagal medapatkan data");
+                        }
+                        binding.btnAction.setEnabled(true);
+                        setLoading(false);
+                    }
+
+                    @Override
+                    public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+                        binding.btnAction.setEnabled(true);
+                        setLoading(false);
+                    }
+                }
+        );
     }
 
     private void pickFromCamera() {
@@ -197,6 +246,7 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
                     for (int i = 0; i < categoryModelList.size(); i++) {
                         if (from.equals(String.valueOf(categoryModelList.get(i).getId()))) {
                             categoryModel = categoryModelList.get(i);
+                            categoryId = categoryModel.getId();
                             binding.category.setText(categoryModel.getCategory());
                         }
                     }

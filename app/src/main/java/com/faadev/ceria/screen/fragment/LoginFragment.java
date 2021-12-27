@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    private ApiService apiService = new ApiService();
+    private ApiService apiService;
     private Preferences preferences = new Preferences();
 
     @Override
@@ -42,6 +42,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void implement() {
+        apiService = new ApiService(getContext());
         binding.btnAction.setOnClickListener(v -> {
             doLogin();
         });
