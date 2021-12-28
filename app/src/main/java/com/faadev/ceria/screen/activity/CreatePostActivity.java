@@ -142,7 +142,7 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
         apiService.addPost(
                 binding.tittle.getText().toString(),
                 binding.content.getText().toString(),
-                "",
+                uri,
                 categoryId,
                 new Callback<GeneralResponse>() {
                     @Override
@@ -159,6 +159,7 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
 
                     @Override
                     public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        System.out.println(t.toString());
                         ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
                         binding.btnAction.setEnabled(true);
                         setLoading(false);
