@@ -3,6 +3,7 @@ package com.faadev.ceria.http;
 import com.faadev.ceria.http.response.AuthResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
+import com.faadev.ceria.http.response.PostResponse;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -23,11 +24,19 @@ public interface ApiInterface {
     @GET("category")
     Call<CategoryResponse> getCategory();
 
-    @Multipart
+    @FormUrlEncoded
     @POST("post")
     Call<GeneralResponse> addPost(@Header("x-access-token") String token,
-                                  @Part("tittle") String tittle,
-                                  @Part("article") String article,
-                                  @Part MultipartBody.Part image,
-                                  @Part("category") int category);
+                                  @Field("tittle") String tittle,
+                                  @Field("article") String article,
+                                  @Field("illustration") String illustration,
+                                  @Field("category") int category);
+
+    @Multipart
+    @POST("upload")
+    Call<GeneralResponse> uploadImage(@Header("x-access-token") String token,
+                                      @Part MultipartBody.Part image);
+
+    @GET("all-post")
+    Call<PostResponse> getApprovedPost();
 }

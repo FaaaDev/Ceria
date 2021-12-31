@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -216,6 +217,24 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
         return image;
     }
 
+    public String getRealPathFromURI(Uri contentURI, Activity context) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        @SuppressWarnings("deprecation")
+        Cursor cursor = context.managedQuery(contentURI, projection, null,
+                null, null);
+        if (cursor == null)
+            return null;
+        int column_index = cursor
+                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        if (cursor.moveToFirst()) {
+            String s = cursor.getString(column_index);
+            // cursor.close();
+            return s;
+        }
+        // cursor.close();
+        return null;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -227,7 +246,8 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
                 binding.illustration.setImageURI(uri);
             } else if (requestCode == 2) {
                 if (data != null) {
-                    uri = data.getData();
+                    System.out.println(data.getData().toString());
+                    uri = Uri.parse(data.getData().toString());
                     binding.noImage.setVisibility(View.GONE);
                     binding.illustration.setVisibility(View.VISIBLE);
                     binding.illustration.setImageURI(uri);

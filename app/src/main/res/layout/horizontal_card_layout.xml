@@ -11,12 +11,14 @@
         android:layout_height="150dp"
         app:cardCornerRadius="20dp">
         <ImageView
+            android:id="@+id/illustration"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/stock2"
             android:scaleType="centerCrop"/>
     </androidx.cardview.widget.CardView>
     <TextView
+        android:id="@+id/tittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="This is the title of content"

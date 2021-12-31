@@ -1,17 +1,26 @@
 package com.faadev.ceria.http;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
+
+import androidx.fragment.app.FragmentActivity;
 
 import com.faadev.ceria.http.response.AuthResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
+import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.utils.CompressImage;
 import com.faadev.ceria.utils.FileUtils;
 import com.faadev.ceria.utils.Preferences;
+import com.faadev.ceria.utils.ShowDialog;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,12 +33,16 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ApiService {
 
     private ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
     private String token = "";
     private Context context;
+
+    public ApiService() {
+    }
 
     public ApiService(Context context) {
         if (Preferences.isLogedIn(context)){
@@ -49,14 +62,38 @@ public class ApiService {
     }
 
     public void addPost(String tittle, String article, Uri illustration, int category, Callback<GeneralResponse> callback) {
-        File file = CompressImage.compress(context, illustration);
+
+        uploadImage(illustration, new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.isSuccessful()){
+                    Call<GeneralResponse> post = apiInterface.addPost(token, tittle, article, response.body().getMessage(), category);
+                    post.enqueue(callback);
+                }
+            }
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                ShowDialog.showError(((FragmentActivity) context).getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
+    public void getAllPost(Callback<PostResponse> callback){
+        Call<PostResponse> getAllPost = apiInterface.getApprovedPost();
+        getAllPost.enqueue(callback);
+    }
+
+    public void uploadImage(Uri uri, Callback<GeneralResponse> callback){
+        File file = CompressImage.compressImage(context, uri);
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
         MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        Call<GeneralResponse> post = apiInterface.addPost(token, tittle, article, body, category);
-        post.enqueue(callback);
+
+        Call<GeneralResponse> upload = apiInterface.uploadImage(token, body);
+        upload.enqueue(callback);
+
     }
 }

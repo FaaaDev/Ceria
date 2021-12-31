@@ -2,6 +2,8 @@ package com.faadev.ceria.screen.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,31 +15,67 @@ import android.view.ViewGroup;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.CardAdapter;
+import com.faadev.ceria.databinding.FragmentTerbaruBinding;
+import com.faadev.ceria.http.ApiService;
+import com.faadev.ceria.http.response.PostResponse;
+import com.faadev.ceria.model.Post;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TerbaruFragment extends Fragment {
 
-    private RecyclerView rv_content1;
+    private FragmentTerbaruBinding binding;
     private CardAdapter cra1;
+    private List<Post> postList;
+    private ApiService apiService = new ApiService();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_terbaru, container, false);
+        binding = FragmentTerbaruBinding.inflate(inflater, container, false);
 
-        _init(root);
-        _prep();
-
-        return root;
+        return binding.getRoot();
     }
 
-    private void _init(View root){
-        rv_content1 = root.findViewById(R.id.rv_content1);
-
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+//        _prep();
     }
+
 
     private void _prep(){
-        cra1 = new CardAdapter(getContext());
-        rv_content1.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
-        rv_content1.setAdapter(cra1);
+        getPost();
+    }
+
+    private void getPost(){
+        postList = new ArrayList<>();
+        apiService.getAllPost(new Callback<PostResponse>() {
+            @Override
+            public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                if (response.isSuccessful()){
+                    postList = response.body().getData();
+                    cra1 = new CardAdapter(getContext(), postList);
+                    binding.rvContent1.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
+                    binding.rvContent1.setAdapter(cra1);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPost();
     }
 }
