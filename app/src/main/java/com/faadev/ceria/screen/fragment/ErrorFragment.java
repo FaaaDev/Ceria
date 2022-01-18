@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.faadev.ceria.screen.activity.AuthActivity;
 import com.faadev.ceria.R;
 import com.faadev.ceria.databinding.FragmentErrorBinding;
+import com.faadev.ceria.utils.Preferences;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class ErrorFragment extends BottomSheetDialogFragment {
@@ -60,6 +61,7 @@ public class ErrorFragment extends BottomSheetDialogFragment {
         super.onDismiss(dialog);
         if (!code.isEmpty()) {
             if (code.equals("401")){
+                Preferences.clearLoggedInUser(getContext());
                 startActivity(new Intent(getContext(), AuthActivity.class));
             }
         }

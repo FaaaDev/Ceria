@@ -14,6 +14,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
     @FormUrlEncoded
@@ -39,4 +40,8 @@ public interface ApiInterface {
 
     @GET("all-post")
     Call<PostResponse> getApprovedPost();
+
+    @POST("like/{post_id}")
+    Call<GeneralResponse> likePost(@Header("x-access-token") String token,
+                                   @Path(value = "post_id") int postId);
 }

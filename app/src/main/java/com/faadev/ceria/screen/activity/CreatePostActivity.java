@@ -137,7 +137,7 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
         });
     }
 
-    private void addPost(){
+    private void addPost() {
         binding.btnAction.setEnabled(false);
         setLoading(true);
         apiService.addPost(
@@ -148,11 +148,13 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
                 new Callback<GeneralResponse>() {
                     @Override
                     public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-                        if (response.isSuccessful()){
+                        System.out.println(response.isSuccessful());
+                        System.out.println(response.code());
+                        if (response.body().getCode() == 200) {
                             Toast.makeText(getApplicationContext(), "Postingan berhasil dibuat!", Toast.LENGTH_LONG).show();
                             finish();
                         } else {
-                            ShowDialog.showError(getSupportFragmentManager(), response.code(), "Error " + response.code() + "-Gagal medapatkan data");
+                            ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal membuat postingan");
                         }
                         binding.btnAction.setEnabled(true);
                         setLoading(false);
@@ -218,7 +220,7 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
     }
 
     public String getRealPathFromURI(Uri contentURI, Activity context) {
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         @SuppressWarnings("deprecation")
         Cursor cursor = context.managedQuery(contentURI, projection, null,
                 null, null);

@@ -2,6 +2,7 @@ package com.faadev.ceria.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.faadev.ceria.databinding.HorizontalCardLayoutBinding;
 import com.faadev.ceria.model.Post;
+import com.faadev.ceria.screen.activity.DetailPostActivity;
 import com.faadev.ceria.utils.GlideApp;
 
 import java.util.List;
@@ -42,7 +44,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
         Post data = mData.get(position);
 
-        holder.binding.card.setOnClickListener(view -> Toast.makeText(mContext, "Position : " + position + " Height : " + holder.binding.card.getHeight(), Toast.LENGTH_LONG).show());
+        holder.binding.card.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, DetailPostActivity.class);
+            intent.putExtra("data", data);
+            mContext.startActivity(intent);
+        });
 
         if (position == 1) {
             holder.binding.card.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));

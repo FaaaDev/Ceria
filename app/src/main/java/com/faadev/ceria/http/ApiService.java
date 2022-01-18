@@ -96,4 +96,9 @@ public class ApiService {
         upload.enqueue(callback);
 
     }
+
+    public void likePost(int userId, Callback<GeneralResponse> callback){
+        Call<GeneralResponse> likePost = apiInterface.likePost(token,userId);
+        likePost.enqueue(callback);
+    }
 }

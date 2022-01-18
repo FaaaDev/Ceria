@@ -8,16 +8,25 @@
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable-v24/layouting.xml" value="0.17051282051282052" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/background_label.xml" value="0.17051282051282052" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/big_tab_indicator.xml" value="0.13125" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/btn_outline.xml" value="0.12996742671009773" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/btn_outline_bookmark.xml" value="0.12996742671009773" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/btn_outline_like.xml" value="0.12996742671009773" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/button_background.xml" value="0.17051282051282052" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/category_selected.xml" value="0.2078125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/category_unselected.xml" value="0.2078125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/circular_progress.xml" value="0.14" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic__error.xml" value="0.13125" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.12996742671009773" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_login_ilustration.xml" value="0.2078125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_add_24.xml" value="0.10208333333333333" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_bookmark_24.xml" value="0.12996742671009773" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_bookmark_border_24.xml" value="0.12996742671009773" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_camera_alt_24.xml" value="0.13125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_check_circle_24.xml" value="0.1" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_close_24.xml" value="0.1" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_diamond_24.xml" value="0.12996742671009773" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_favorite_border_24.xml" value="0.12996742671009773" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_favorite_white.xml" value="0.12996742671009773" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_image_24.xml" value="0.13125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_round_uncheck_circle_24.xml" value="0.1" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable/ic_storage.xml" value="0.13125" />
@@ -29,6 +38,7 @@
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout-v21/main_content.xml" value="0.16259057971014493" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_auth.xml" value="0.10621584699453553" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_create_post.xml" value="0.19" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_detail_post.xml" value="0.15" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/activity_main.xml" value="0.14479166666666668" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/content_scrolling.xml" value="0.16259057971014493" />
@@ -42,6 +52,7 @@
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/layout_category.xml" value="0.16259057971014493" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/loading_layout.xml" value="0.25" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/main_content.xml" value="0.2" />
+        <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/nav_header_main.xml" value="0.12105263157894737" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/xml/file_path.xml" value="0.1" />
       </map>
     </option>

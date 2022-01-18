@@ -22,6 +22,9 @@ public class Post implements Serializable {
     @SerializedName("approve")
     private int approve;
 
+    public Post() {
+    }
+
     public int getId() {
         return id;
     }
