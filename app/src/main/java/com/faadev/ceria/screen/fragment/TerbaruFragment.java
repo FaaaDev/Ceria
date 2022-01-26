@@ -19,6 +19,7 @@ import com.faadev.ceria.databinding.FragmentTerbaruBinding;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.model.Post;
+import com.faadev.ceria.utils.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class TerbaruFragment extends Fragment {
 
     private void getPost(){
         postList = new ArrayList<>();
-        apiService.getAllPost(new Callback<PostResponse>() {
+        Callback<PostResponse> callback = new Callback<PostResponse>() {
             @Override
             public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
                 if (response.isSuccessful()){
@@ -70,7 +71,12 @@ public class TerbaruFragment extends Fragment {
             public void onFailure(Call<PostResponse> call, Throwable t) {
 
             }
-        });
+        };
+        if (Preferences.isLogedIn(getContext())){
+            apiService.getAllPostWithId(Preferences.getId(getContext()), callback);
+         } else {
+            apiService.getAllPost(callback);
+        }
     }
 
     @Override

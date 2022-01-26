@@ -7,6 +7,7 @@ import com.faadev.ceria.http.response.PostResponse;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -41,7 +42,14 @@ public interface ApiInterface {
     @GET("all-post")
     Call<PostResponse> getApprovedPost();
 
+    @GET("all-post/{user_id}")
+    Call<PostResponse> getAllPost(@Path(value = "user_id") int id);
+
     @POST("like/{post_id}")
     Call<GeneralResponse> likePost(@Header("x-access-token") String token,
                                    @Path(value = "post_id") int postId);
+
+    @DELETE("like/{post_id}")
+    Call<GeneralResponse> unlikePost(@Header("x-access-token") String token,
+                                     @Path(value = "post_id") int postId);
 }

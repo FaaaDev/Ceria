@@ -61,11 +61,28 @@ public class DetailPostActivity extends AppCompatActivity {
             GlideApp.with(this)
                     .load(post.getIllustration())
                     .into(binding.imageContent);
+            setLiked(post.isLiked());
         }
 
         binding.btnReward.setOnClickListener(v -> {});
-        binding.btnLike.setOnClickListener(v -> likePost());
+        binding.btnLike.setOnClickListener(v -> {
+            if (post.isLiked()){
+                unlikePost();
+            } else {
+                likePost();
+            }
+        });
         binding.btnBookmark.setOnClickListener(v -> {});
+    }
+
+    private void setLiked(boolean isLiked){
+        if (isLiked) {
+            binding.iconLike.setImageResource(R.drawable.ic_round_favorite_white);
+            post.setLiked(true);
+        } else {
+            binding.iconLike.setImageResource(R.drawable.ic_round_favorite_border_24);
+            post.setLiked(false);
+        }
     }
 
     private void likePost(){
@@ -75,7 +92,29 @@ public class DetailPostActivity extends AppCompatActivity {
             public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
                 if (response.body().getCode() == 200){
                     binding.btnLike.setEnabled(true);
-                    binding.iconLike.setImageResource(R.drawable.ic_round_favorite_white);
+                    setLiked(true);
+                } else {
+                    binding.btnLike.setEnabled(true);
+                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                binding.btnLike.setEnabled(true);
+                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
+    private void unlikePost(){
+        binding.btnLike.setEnabled(false);
+        apiService.unlikePost(post.getId(), new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.body().getCode() == 200){
+                    binding.btnLike.setEnabled(true);
+                    setLiked(false);
                 } else {
                     binding.btnLike.setEnabled(true);
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");

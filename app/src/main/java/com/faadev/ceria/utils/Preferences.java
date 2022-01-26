@@ -64,6 +64,13 @@ public class Preferences {
         return user.getToken();
     }
 
+    public static int getId(Context context) {
+        Gson gson = new Gson();
+        UserData user = gson.fromJson(getSharedPreference(context).getString(KEY_USER_TEREGISTER,""), UserData.class);
+
+        return user.getUser().getId();
+    }
+
     public static Boolean isLogedIn(Context context){
         return !TextUtils.isEmpty(getSharedPreference(context).getString(KEY_USER_TEREGISTER,""));
     }

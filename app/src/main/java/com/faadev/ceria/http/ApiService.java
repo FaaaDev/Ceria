@@ -45,7 +45,7 @@ public class ApiService {
     }
 
     public ApiService(Context context) {
-        if (Preferences.isLogedIn(context)){
+        if (Preferences.isLogedIn(context)) {
             token = Preferences.getToken(context);
         }
         this.context = context;
@@ -66,11 +66,12 @@ public class ApiService {
         uploadImage(illustration, new Callback<GeneralResponse>() {
             @Override
             public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Call<GeneralResponse> post = apiInterface.addPost(token, tittle, article, response.body().getMessage(), category);
                     post.enqueue(callback);
                 }
             }
+
             @Override
             public void onFailure(Call<GeneralResponse> call, Throwable t) {
                 ShowDialog.showError(((FragmentActivity) context).getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
@@ -78,12 +79,17 @@ public class ApiService {
         });
     }
 
-    public void getAllPost(Callback<PostResponse> callback){
+    public void getAllPost(Callback<PostResponse> callback) {
         Call<PostResponse> getAllPost = apiInterface.getApprovedPost();
         getAllPost.enqueue(callback);
     }
 
-    public void uploadImage(Uri uri, Callback<GeneralResponse> callback){
+    public void getAllPostWithId(int id, Callback<PostResponse> callback) {
+        Call<PostResponse> getAllPost = apiInterface.getAllPost(id);
+        getAllPost.enqueue(callback);
+    }
+
+    public void uploadImage(Uri uri, Callback<GeneralResponse> callback) {
         File file = CompressImage.compressImage(context, uri);
         RequestBody requestFile =
                 RequestBody.create(MediaType.parse("multipart/form-data"), file);
@@ -97,8 +103,13 @@ public class ApiService {
 
     }
 
-    public void likePost(int userId, Callback<GeneralResponse> callback){
-        Call<GeneralResponse> likePost = apiInterface.likePost(token,userId);
+    public void likePost(int postId, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> likePost = apiInterface.likePost(token, postId);
+        likePost.enqueue(callback);
+    }
+
+    public void unlikePost(int postId, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> likePost = apiInterface.unlikePost(token, postId);
         likePost.enqueue(callback);
     }
 }

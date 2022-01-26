@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.faadev.ceria.databinding.HorizontalCardLayoutBinding;
 import com.faadev.ceria.model.Post;
+import com.faadev.ceria.screen.activity.AuthActivity;
 import com.faadev.ceria.screen.activity.DetailPostActivity;
 import com.faadev.ceria.utils.GlideApp;
+import com.faadev.ceria.utils.Preferences;
 
 import java.util.List;
 
@@ -45,9 +47,13 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         Post data = mData.get(position);
 
         holder.binding.card.setOnClickListener(view -> {
-            Intent intent = new Intent(mContext, DetailPostActivity.class);
-            intent.putExtra("data", data);
-            mContext.startActivity(intent);
+            if (Preferences.isLogedIn(mContext)){
+                Intent intent = new Intent(mContext, DetailPostActivity.class);
+                intent.putExtra("data", data);
+                mContext.startActivity(intent);
+            } else {
+                mContext.startActivity(new Intent(mContext, AuthActivity.class));
+            }
         });
 
         if (position == 1) {

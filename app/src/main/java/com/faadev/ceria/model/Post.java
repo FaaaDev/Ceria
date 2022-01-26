@@ -21,6 +21,8 @@ public class Post implements Serializable {
     private String illustration;
     @SerializedName("approve")
     private int approve;
+    @SerializedName("liked")
+    boolean isLiked;
 
     public Post() {
     }
@@ -87,5 +89,13 @@ public class Post implements Serializable {
 
     public void setApprove(int approve) {
         this.approve = approve;
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
     }
 }
