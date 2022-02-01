@@ -1,14 +1,17 @@
 package com.faadev.ceria.screen.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.databinding.ActivityDetailPostBinding;
+import com.faadev.ceria.databinding.BottomDetailBinding;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.model.Post;
@@ -22,6 +25,7 @@ import retrofit2.Response;
 public class DetailPostActivity extends AppCompatActivity {
 
     private ActivityDetailPostBinding binding;
+    private BottomDetailBinding bottom;
     private  Post post = new Post();
     private ApiService apiService;
 
@@ -40,7 +44,14 @@ public class DetailPostActivity extends AppCompatActivity {
                 this.getWindow().setNavigationBarColor(Color.WHITE);
             }
             main.setSystemUiVisibility(flags);
-            this.getWindow().setStatusBarColor(Color.argb(255, 0, 0, 23));
+            this.getWindow().setStatusBarColor(Color.WHITE);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            this.getWindow().setStatusBarColor(Color.TRANSPARENT);
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
 
         post = (Post) getIntent().getSerializableExtra("data");
@@ -55,77 +66,78 @@ public class DetailPostActivity extends AppCompatActivity {
     }
 
     private void implement(){
-//        if (post != null){
-//            binding.tittle.setText(post.getTittle());
-//            binding.content.setText(post.getArticle());
-//            GlideApp.with(this)
-//                    .load(post.getIllustration())
-//                    .into(binding.imageContent);
-//            setLiked(post.isLiked());
-//        }
-//
-//        binding.btnReward.setOnClickListener(v -> {});
-//        binding.btnLike.setOnClickListener(v -> {
-//            if (post.isLiked()){
-//                unlikePost();
-//            } else {
-//                likePost();
-//            }
-//        });
-//        binding.btnBookmark.setOnClickListener(v -> {});
+//        bottom = BottomDetailBinding.inflate(getLayoutInflater());
+        if (post != null){
+            binding.includedLayout.tittle.setText(post.getTittle());
+            binding.includedLayout.content.setText(post.getArticle());
+            GlideApp.with(this)
+                    .load(post.getIllustration())
+                    .into(binding.imageContent);
+            setLiked(post.isLiked());
+        }
+
+        binding.includedLayout.btnReward.setOnClickListener(v -> {});
+        binding.includedLayout.btnLike.setOnClickListener(v -> {
+            if (post.isLiked()){
+                unlikePost();
+            } else {
+                likePost();
+            }
+        });
+        binding.includedLayout.btnBookmark.setOnClickListener(v -> {});
     }
 
     private void setLiked(boolean isLiked){
-//        if (isLiked) {
-//            binding.iconLike.setImageResource(R.drawable.ic_round_favorite_white);
-//            post.setLiked(true);
-//        } else {
-//            binding.iconLike.setImageResource(R.drawable.ic_round_favorite_border_24);
-//            post.setLiked(false);
-//        }
+        if (isLiked) {
+            binding.includedLayout.iconLike.setImageResource(R.drawable.ic_round_favorite_white);
+            post.setLiked(true);
+        } else {
+            binding.includedLayout.iconLike.setImageResource(R.drawable.ic_round_favorite_border_24);
+            post.setLiked(false);
+        }
     }
 
-//    private void likePost(){
-//        binding.btnLike.setEnabled(false);
-//        apiService.likePost(post.getId(), new Callback<GeneralResponse>() {
-//            @Override
-//            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-//                if (response.body().getCode() == 200){
-//                    binding.btnLike.setEnabled(true);
-//                    setLiked(true);
-//                } else {
-//                    binding.btnLike.setEnabled(true);
-//                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<GeneralResponse> call, Throwable t) {
-//                binding.btnLike.setEnabled(true);
-//                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
-//            }
-//        });
-//    }
+    private void likePost(){
+        binding.includedLayout.btnLike.setEnabled(false);
+        apiService.likePost(post.getId(), new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.body().getCode() == 200){
+                    binding.includedLayout.btnLike.setEnabled(true);
+                    setLiked(true);
+                } else {
+                    binding.includedLayout.btnLike.setEnabled(true);
+                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");
+                }
+            }
 
-//    private void unlikePost(){
-//        binding.btnLike.setEnabled(false);
-//        apiService.unlikePost(post.getId(), new Callback<GeneralResponse>() {
-//            @Override
-//            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-//                if (response.body().getCode() == 200){
-//                    binding.btnLike.setEnabled(true);
-//                    setLiked(false);
-//                } else {
-//                    binding.btnLike.setEnabled(true);
-//                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<GeneralResponse> call, Throwable t) {
-//                binding.btnLike.setEnabled(true);
-//                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
-//            }
-//        });
-//    }
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                binding.includedLayout.btnLike.setEnabled(true);
+                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
+    private void unlikePost(){
+        binding.includedLayout.btnLike.setEnabled(false);
+        apiService.unlikePost(post.getId(), new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.body().getCode() == 200){
+                    binding.includedLayout.btnLike.setEnabled(true);
+                    setLiked(false);
+                } else {
+                    binding.includedLayout.btnLike.setEnabled(true);
+                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                binding.includedLayout.btnLike.setEnabled(true);
+                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
 }
