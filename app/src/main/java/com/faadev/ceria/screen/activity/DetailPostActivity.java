@@ -70,6 +70,7 @@ public class DetailPostActivity extends AppCompatActivity {
         if (post != null){
             binding.includedLayout.tittle.setText(post.getTittle());
             binding.includedLayout.content.setText(post.getArticle());
+            binding.includedLayout.writer.setText(post.getWriter());
             GlideApp.with(this)
                     .load(post.getIllustration())
                     .into(binding.imageContent);

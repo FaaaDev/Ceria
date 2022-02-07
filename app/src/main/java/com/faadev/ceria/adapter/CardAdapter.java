@@ -74,6 +74,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
         holder.binding.tittle.setText(data.getTittle());
 
+        holder.binding.writer.setText(data.getWriter());
+
         Glide.with(mContext)
                 .load(data.getIllustration())
                 .into(holder.binding.illustration);
