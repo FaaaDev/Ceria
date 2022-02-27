@@ -15,14 +15,30 @@
         android:scaleType="centerCrop"
         android:layout_marginBottom="100dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@drawable/gradient_flip"/>
 
     <include
         android:id="@+id/included_layout"
         layout="@layout/bottom_detail"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/gradient_flip"
+        android:paddingTop="40dp">
+
+        <RelativeLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/transparancy_button_background">
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_round_navigate_before_24"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

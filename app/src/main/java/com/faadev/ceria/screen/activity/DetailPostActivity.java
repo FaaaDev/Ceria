@@ -1,13 +1,12 @@
 package com.faadev.ceria.screen.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.databinding.ActivityDetailPostBinding;
@@ -17,6 +16,7 @@ import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.model.Post;
 import com.faadev.ceria.utils.GlideApp;
 import com.faadev.ceria.utils.ShowDialog;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -86,6 +86,23 @@ public class DetailPostActivity extends AppCompatActivity {
             }
         });
         binding.includedLayout.btnBookmark.setOnClickListener(v -> {});
+
+        BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(binding.includedLayout.getRoot());
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View view, int i) {
+                if (i == 4 ){
+                    binding.includedLayout.tittle.setVisibility(View.VISIBLE);
+                } else {
+                    binding.includedLayout.tittle.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View view, float v) {
+
+            }
+        });
     }
 
     private void setLiked(boolean isLiked){
