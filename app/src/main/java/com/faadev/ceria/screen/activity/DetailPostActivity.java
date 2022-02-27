@@ -69,6 +69,7 @@ public class DetailPostActivity extends AppCompatActivity {
 //        bottom = BottomDetailBinding.inflate(getLayoutInflater());
         if (post != null){
             binding.includedLayout.tittle.setText(post.getTittle());
+            binding.includedLayout.secondaryTittle.setText(post.getTittle());
             binding.includedLayout.content.setText(post.getArticle());
             binding.includedLayout.writer.setText(post.getWriter());
             GlideApp.with(this)
@@ -93,8 +94,10 @@ public class DetailPostActivity extends AppCompatActivity {
             public void onStateChanged(@NonNull View view, int i) {
                 if (i == 4 ){
                     binding.includedLayout.tittle.setVisibility(View.VISIBLE);
+                    binding.includedLayout.secondaryTittle.setVisibility(View.GONE);
                 } else {
                     binding.includedLayout.tittle.setVisibility(View.GONE);
+                    binding.includedLayout.secondaryTittle.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -102,6 +105,10 @@ public class DetailPostActivity extends AppCompatActivity {
             public void onSlide(@NonNull View view, float v) {
 
             }
+        });
+
+        binding.backBtn.setOnClickListener(v -> {
+            onBackPressed();
         });
     }
 
