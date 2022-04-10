@@ -1,56 +1,44 @@
 package com.faadev.ceria.screen.activity;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.CategoryAdapter;
 import com.faadev.ceria.adapter.ItemCLickListener;
 import com.faadev.ceria.adapter.TabAdapter;
-import com.faadev.ceria.screen.fragment.DisimpanFragment;
-import com.faadev.ceria.screen.fragment.DisukaiFragment;
-import com.faadev.ceria.screen.fragment.PopularFragment;
-import com.faadev.ceria.screen.fragment.TerbaruFragment;
 import com.faadev.ceria.model.CategoryModel;
-import com.faadev.ceria.utils.LoginRequired;
+import com.faadev.ceria.screen.ui.saldoku.SaldoFragment;
+import com.faadev.ceria.screen.ui.home.HomeFragment;
+import com.faadev.ceria.screen.ui.notifications.NotificationsFragment;
 import com.faadev.ceria.utils.SlidingRootNavBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView menu;
-    private NavigationView nav_view;
-    private TabLayout tab;
-    private TabAdapter adapter;
-    private ViewPager vp;
-    private RecyclerView rv_category;
-    private CategoryAdapter categoryAdapter;
-    private List<CategoryModel> cmod;
-    private ItemCLickListener itemCLickListener;
-    private String category = "";
-    private FloatingActionButton fabAdd;
+    private CardView menu;
     private SlidingRootNav sliding;
-    private CardView drawerLayout;
+    private CardView home, saldo, postingan, notifikasi, pengaturan, dark_mode, logout;
+    private boolean isDark = false;
+    private ImageView dark_toggle;
+    private FragmentTransaction ft;
+    private String currentFragment = "home";
 
 
     @Override
@@ -64,16 +52,16 @@ public class MainActivity extends AppCompatActivity {
             flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-                this.getWindow().setNavigationBarColor(Color.TRANSPARENT);
+                this.getWindow().setNavigationBarColor(Color.WHITE);
             }
             main.setSystemUiVisibility(flags);
-            this.getWindow().setStatusBarColor(Color.TRANSPARENT);
+            this.getWindow().setStatusBarColor(Color.WHITE);
         }
 
 
         sliding = new SlidingRootNavBuilder(this)
                 .withMenuLayout(R.layout.nav_header_main)
-                .withDragDistance(140)
+                .withDragDistance(250)
                 .withRootViewElevation(25)
                 .withRootViewScale(0.9f)
                 .withRootViewXTranslation(100, this)
@@ -82,109 +70,73 @@ public class MainActivity extends AppCompatActivity {
                 .withSavedState(savedInstanceState)
                 .inject();
 
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_frame, new HomeFragment());
+        ft.commit();
+
         _init();
         _prep();
 
     }
 
-    private void _init(){
-        tab = findViewById(R.id.tab);
-        vp = findViewById(R.id.vp);
-//        nav_view = findViewById(R.id.nav_drawer);
+    private void _init() {
         menu = findViewById(R.id.menu_btn);
-        rv_category = findViewById(R.id.rv_category);
-        fabAdd = findViewById(R.id.fab_add);
+        home = findViewById(R.id.home);
+        saldo = findViewById(R.id.saldo);
+        postingan = findViewById(R.id.posting);
+        notifikasi = findViewById(R.id.notifikasi);
+        pengaturan = findViewById(R.id.pengaturan);
+        dark_mode = findViewById(R.id.dark_mode);
+        logout = findViewById(R.id.logout);
+        dark_toggle = findViewById(R.id.dark_toggle);
     }
 
-    private void _prep(){
+    private void _prep() {
         menu.setOnClickListener(view -> {
             sliding.openMenu();
         });
 
-//        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        menu.setOnClickListener(v -> drawer.openDrawer(Gravity.LEFT));
-//
-//        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
-//            @Override
-//            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    View main = findViewById(R.id.container);
-//                    int flags = main.getSystemUiVisibility();
-//                    flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                        flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-//                        getWindow().setNavigationBarColor(Color.WHITE);
-//                    }
-//                    main.setSystemUiVisibility(flags);
-//                    getWindow().setStatusBarColor(Color.TRANSPARENT);
-//                }
-//            }
-//
-//            @Override
-//            public void onDrawerOpened(@NonNull View drawerView) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    View main = findViewById(R.id.container);
-//                    int flags = main.getSystemUiVisibility();
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                        flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-//                        getWindow().setNavigationBarColor(Color.WHITE);
-//                    }
-//                    main.setSystemUiVisibility(flags);
-//                    getWindow().setStatusBarColor(Color.TRANSPARENT);
-//                }
-//            }
-//
-//            @Override
-//            public void onDrawerClosed(@NonNull View drawerView) {
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    View main = findViewById(R.id.container);
-//                    int flags = main.getSystemUiVisibility();
-//                    flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                        flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-//                        getWindow().setNavigationBarColor(Color.WHITE);
-//                    }
-//                    main.setSystemUiVisibility(flags);
-//                    getWindow().setStatusBarColor(Color.WHITE);
-//                }
-//            }
-//
-//            @Override
-//            public void onDrawerStateChanged(int newState) {
-//
-//            }
-//        });
-
-        adapter = new TabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TerbaruFragment(), "Terbaru");
-        adapter.addFragment(new PopularFragment(), "Popular");
-        adapter.addFragment(new DisukaiFragment(), "Disukai");
-        adapter.addFragment(new DisimpanFragment(), "Disimpan");
-        vp.setAdapter(adapter);
-        tab.setupWithViewPager(vp);
-
-        cmod = new ArrayList<>();
-        cmod.add(new CategoryModel("Cerpen", true));
-        cmod.add(new CategoryModel("Novel", false));
-        cmod.add(new CategoryModel("Puisi", false));
-        cmod.add(new CategoryModel("Fabel", false));
-        cmod.add(new CategoryModel("Dongeng", false));
-        cmod.add(new CategoryModel("Cerita Rakyat", false));
-        cmod.add(new CategoryModel("Agama", false));
-
-        itemCLickListener = new ItemCLickListener() {
-            @Override
-            public void onItemClick(String param) {
-                category = param;
-            }
-        };
-
-        categoryAdapter = new CategoryAdapter(this, cmod, itemCLickListener);
-        rv_category.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        rv_category.setAdapter(categoryAdapter);
-
-        fabAdd.setOnClickListener(v -> {
-            LoginRequired.start(this, new Intent(this, CreatePostActivity.class));
+        home.setOnClickListener(v -> {
+            navigateDrawer(new HomeFragment(), "home");
         });
+        saldo.setOnClickListener(v -> {
+            navigateDrawer(new SaldoFragment(), "saldo");
+        });
+        postingan.setOnClickListener(v -> {
+            navigateDrawer(new NotificationsFragment(), "post");
+        });
+        notifikasi.setOnClickListener(v -> {
+//            navigateDrawer();
+        });
+        pengaturan.setOnClickListener(v -> {
+//            navigateDrawer();
+        });
+        dark_mode.setOnClickListener(v -> {
+            isDark = !isDark;
+            Handler hh = new Handler();
+            hh.postDelayed(() -> {
+                dark_toggle.setImageResource(isDark ? R.drawable.ic_toggle_on : R.drawable.ic_toggle_off);
+            }, 500);
+        });
+        logout.setOnClickListener(v -> {
+
+        });
+    }
+
+    private void navigateDrawer(Fragment fragment, String tag) {
+        Handler hh1 = new Handler();
+        hh1.postDelayed(() -> {
+            sliding.closeMenu();
+        }, 100);
+        if(!currentFragment.equals(tag)) {
+            currentFragment = tag;
+            ft = getSupportFragmentManager().beginTransaction();
+//            ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
+            ft.replace(R.id.main_frame, fragment);
+            Handler hh = new Handler();
+            hh.postDelayed(() -> {
+                ft.commit();
+            }, 100);
+        }
     }
 }

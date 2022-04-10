@@ -14,55 +14,63 @@
         android:layout_marginStart="250dp"
         android:layout_marginEnd="-15dp"
         android:layout_marginVertical="60dp"/>
+
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="90dp">
+        android:paddingTop="120dp">
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="35dp"
-            app:cardElevation="0dp"
             android:layout_marginStart="-35dp"
-            android:layout_marginEnd="20dp">
+            android:layout_marginEnd="25dp"
+            app:cardCornerRadius="35dp"
+            app:cardElevation="0dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#309DA1"
                 android:orientation="horizontal"
                 android:paddingVertical="20dp"
-                android:paddingStart="55dp"
-                android:paddingEnd="20dp"
-                android:background="#309DA1">
+                android:paddingStart="60dp"
+                android:paddingEnd="20dp">
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
                     android:orientation="vertical">
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
                         android:fontFamily="@font/dosis_semibold"
+                        android:maxLines="1"
                         android:text="Username"
                         android:textColor="#ffffff"
-                        android:textSize="20sp"
-                        android:maxLines="1"
-                        android:ellipsize="end"/>
+                        android:textSize="20sp" />
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
                         android:fontFamily="@font/dosis_regular"
+                        android:maxLines="1"
                         android:text="email@mail.com"
                         android:textColor="#ffffff"
-                        android:textSize="14sp"
-                        android:maxLines="1"
-                        android:ellipsize="end"/>
+                        android:textSize="14sp" />
                 </LinearLayout>
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     app:cardCornerRadius="28dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -71,5 +79,281 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/home"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="50dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mainColor"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_home_basil" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="Home"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                tools:targetApi="lollipop" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/saldo"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mainColor"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_wallet" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="Saldoku"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                tools:targetApi="lollipop" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/posting"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mainColor"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_box" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="Postinganku"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                tools:targetApi="lollipop" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/notifikasi"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mainColor"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_notification" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="Notifikasi"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                tools:targetApi="lollipop" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pengaturan"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mainColor"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_settings_basil" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="Pengaturan"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                tools:targetApi="lollipop" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/dark_mode"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/mainColor"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:src="@drawable/ic_moon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="Mode Gelap"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
+
+                <ImageView
+                    android:id="@+id/dark_toggle"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/ic_toggle_off"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                tools:targetApi="lollipop" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/logout"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        android:layout_width="250dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/mainColor"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_logout"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="15dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/dosis_regular"
+                android:text="Keluar"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            tools:targetApi="lollipop" />
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

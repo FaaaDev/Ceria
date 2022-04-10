@@ -25,7 +25,7 @@ public class XTranslationTransformation implements RootTransformation {
     @Override
     public void transform(float dragProgress, View rootView) {
         float translation = SideNavUtils.evaluate(dragProgress, START_TRANSLATION, endTranslation);
-        rootView.setTranslationX(translation);
+//        rootView.setTranslationX(translation);
         if(translation == 0) {
             rootView.setBackgroundResource(R.drawable.root_default);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -33,10 +33,10 @@ public class XTranslationTransformation implements RootTransformation {
                 flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     flags |= View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-                    activity.getWindow().setNavigationBarColor(Color.TRANSPARENT);
+                    activity.getWindow().setNavigationBarColor(Color.WHITE);
                 }
                 rootView.setSystemUiVisibility(flags);
-                activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+                activity.getWindow().setStatusBarColor(Color.WHITE);
             }
         } else {
             rootView.setBackgroundResource(R.drawable.root_slide);

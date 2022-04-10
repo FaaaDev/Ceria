@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.faadev.ceria.screen.ui.dashboard.DashboardFragment"
+        android:name="com.faadev.ceria.screen.ui.saldoku.SaldoFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_saldo" />
 
     <fragment
         android:id="@+id/navigation_notifications"
