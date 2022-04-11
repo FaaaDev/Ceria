@@ -10,11 +10,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.faadev.ceria.R;
+import com.faadev.ceria.adapter.TransactionAdapter;
 import com.faadev.ceria.databinding.FragmentSaldoBinding;
 
 public class SaldoFragment extends Fragment {
 
     private FragmentSaldoBinding binding;
+    private TransactionAdapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSaldoBinding.inflate(inflater, container, false);
@@ -33,5 +35,8 @@ public class SaldoFragment extends Fragment {
         binding.topup.setOnClickListener(v -> {
             System.out.println("presssss");
         });
+
+        adapter = new TransactionAdapter(getContext());
+        binding.rvTransaction.setAdapter(adapter);
     }
 }
