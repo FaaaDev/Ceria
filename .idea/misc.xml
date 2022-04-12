@@ -76,6 +76,7 @@
         <entry key="app/src/main/res/drawable/ic_toggle_off.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_toggle_on.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_wallet.xml" value="0.1095" />
+        <entry key="app/src/main/res/drawable/nominal_unselected.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/root_card.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/root_default.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/root_slide.xml" value="0.1465" />
@@ -83,6 +84,7 @@
         <entry key="app/src/main/res/drawable/transparent_background.xml" value="0.145" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.24230072463768115" />
+        <entry key="app/src/main/res/layout/activity_deposit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_post.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bottom_detail.xml" value="0.25" />
@@ -90,6 +92,7 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/fragment_saldo.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_nominal.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/item_transaction.xml" value="0.335" />
         <entry key="app/src/main/res/layout/main_content.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.335" />

@@ -1,5 +1,6 @@
 package com.faadev.ceria.screen.ui.saldoku;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.TransactionAdapter;
 import com.faadev.ceria.databinding.FragmentSaldoBinding;
+import com.faadev.ceria.screen.activity.DepositActivity;
 
 public class SaldoFragment extends Fragment {
 
@@ -33,7 +35,7 @@ public class SaldoFragment extends Fragment {
     private void implement() {
         binding.wd.setOnClickListener(v -> {});
         binding.topup.setOnClickListener(v -> {
-            System.out.println("presssss");
+            startActivity(new Intent(getContext(), DepositActivity.class));
         });
 
         adapter = new TransactionAdapter(getContext());
