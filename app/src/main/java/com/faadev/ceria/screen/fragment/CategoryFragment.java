@@ -55,7 +55,8 @@ public class CategoryFragment extends BottomSheetDialogFragment {
         }
 
         itemCLickListener = param -> {
-            category = param;
+            category = String.valueOf(list.get(param).getId());
+            System.out.println(category);
             dismiss();
         };
 

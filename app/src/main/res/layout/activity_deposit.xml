@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/fontColor"
-    android:id="@+id/container"
     tools:context=".screen.activity.DepositActivity">
 
     <androidx.cardview.widget.CardView
@@ -63,6 +63,7 @@
                         android:layout_height="18dp"
                         android:src="@drawable/ic_round_close_24" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -84,26 +85,29 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="30dp"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/dosis_bold"
                         android:text="Isi Ulang Coin"
                         android:textColor="@color/fontColor"
-                        android:textSize="36sp"
-                        android:layout_marginHorizontal="30dp"/>
+                        android:textSize="36sp" />
+
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_nominal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="35dp"
                         android:paddingHorizontal="25dp"
-                        tools:itemCount="6"
-                        tools:listitem="@layout/item_nominal"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         app:spanCount="2"
-                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"/>
+                        tools:itemCount="6"
+                        tools:listitem="@layout/item_nominal" />
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="65dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginHorizontal="30dp">
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="20dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -122,19 +126,19 @@
                             <LinearLayout
                                 android:layout_width="1dp"
                                 android:layout_height="match_parent"
-                                android:background="#CDCDCD"
                                 android:layout_marginHorizontal="10dp"
-                                android:layout_marginVertical="5dp"/>
+                                android:layout_marginVertical="5dp"
+                                android:background="#CDCDCD" />
 
                             <EditText
                                 android:id="@+id/nominal"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:background="#00000000"
                                 android:fontFamily="@font/dosis_regular"
                                 android:hint="10000000"
-                                android:inputType="textCapWords"
-                                android:textSize="16sp"
-                                android:background="#00000000"/>
+                                android:inputType="number"
+                                android:textSize="16sp" />
                         </LinearLayout>
 
                         <TextView
@@ -148,11 +152,12 @@
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginHorizontal="30dp">
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginTop="24dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -160,6 +165,16 @@
                             android:layout_marginTop="12dp"
                             android:background="@drawable/layouting">
 
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_bank"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                app:spanCount="3"
+                                tools:itemCount="3"
+                                tools:listitem="@layout/item_bank"
+                                android:nestedScrollingEnabled="true"/>
                         </LinearLayout>
 
                         <TextView
@@ -180,9 +195,9 @@
                 android:id="@+id/btn_action"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="30dp"
-                android:layout_marginHorizontal="25dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="0dp">
 

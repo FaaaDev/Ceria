@@ -64,6 +64,7 @@
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_bank.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_box.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_brilogo.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/ic_card_bg.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_card_bg2.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_empty_illustration.xml" value="0.145" />
@@ -76,6 +77,7 @@
         <entry key="app/src/main/res/drawable/ic_toggle_off.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_toggle_on.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_wallet.xml" value="0.1095" />
+        <entry key="app/src/main/res/drawable/nominal_selected.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/nominal_unselected.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/root_card.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/root_default.xml" value="0.1465" />
@@ -92,6 +94,7 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/fragment_saldo.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_bank.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/item_nominal.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/item_transaction.xml" value="0.335" />
         <entry key="app/src/main/res/layout/main_content.xml" value="0.17755825734549138" />

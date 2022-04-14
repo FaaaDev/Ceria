@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
         cmod.add(new CategoryModel("Cerita Rakyat", false));
         cmod.add(new CategoryModel("Agama", false));
 
-        itemCLickListener = param -> category = param;
+        itemCLickListener = param -> category = cmod.get(param).getCategory();
 
         categoryAdapter = new CategoryAdapter(getContext(), cmod, itemCLickListener);
         binding.rvCategory.setAdapter(categoryAdapter);
