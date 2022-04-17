@@ -1,5 +1,6 @@
 package com.faadev.ceria.screen.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.faadev.ceria.model.CategoryModel;
 import com.faadev.ceria.screen.ui.saldoku.SaldoFragment;
 import com.faadev.ceria.screen.ui.home.HomeFragment;
 import com.faadev.ceria.screen.ui.notifications.NotificationsFragment;
+import com.faadev.ceria.utils.Preferences;
 import com.faadev.ceria.utils.SlidingRootNavBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
@@ -97,13 +99,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         home.setOnClickListener(v -> {
-            navigateDrawer(new HomeFragment(), "home");
+            navigateDrawer(new HomeFragment(), "home", false);
         });
         saldo.setOnClickListener(v -> {
-            navigateDrawer(new SaldoFragment(), "saldo");
+            navigateDrawer(new SaldoFragment(), "saldo", true);
         });
         postingan.setOnClickListener(v -> {
-            navigateDrawer(new NotificationsFragment(), "post");
+            navigateDrawer(new NotificationsFragment(), "post", true);
         });
         notifikasi.setOnClickListener(v -> {
 //            navigateDrawer();
@@ -123,20 +125,43 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void navigateDrawer(Fragment fragment, String tag) {
-        Handler hh1 = new Handler();
-        hh1.postDelayed(() -> {
-            sliding.closeMenu();
-        }, 100);
-        if(!currentFragment.equals(tag)) {
-            currentFragment = tag;
-            ft = getSupportFragmentManager().beginTransaction();
-//            ft.setCustomAnimations(R.animator.fade_in, R.animator.fade_out);
-            ft.replace(R.id.main_frame, fragment);
-            Handler hh = new Handler();
-            hh.postDelayed(() -> {
-                ft.commit();
+    private void navigateDrawer(Fragment fragment, String tag, boolean loginRequired) {
+        if (loginRequired) {
+            if (Preferences.isLogedIn(this)) {
+                Handler hh1 = new Handler();
+                hh1.postDelayed(() -> {
+                    sliding.closeMenu();
+                }, 100);
+                if(!currentFragment.equals(tag)) {
+                    currentFragment = tag;
+                    ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.main_frame, fragment);
+                    Handler hh = new Handler();
+                    hh.postDelayed(() -> {
+                        ft.commit();
+                    }, 100);
+                }
+            } else {
+                Handler hh1 = new Handler();
+                hh1.postDelayed(() -> {
+                    sliding.closeMenu();
+                    startActivity(new Intent(this, AuthActivity.class));
+                }, 100);
+            }
+        } else {
+            Handler hh1 = new Handler();
+            hh1.postDelayed(() -> {
+                sliding.closeMenu();
             }, 100);
+            if(!currentFragment.equals(tag)) {
+                currentFragment = tag;
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.main_frame, fragment);
+                Handler hh = new Handler();
+                hh.postDelayed(() -> {
+                    ft.commit();
+                }, 100);
+            }
         }
     }
 }

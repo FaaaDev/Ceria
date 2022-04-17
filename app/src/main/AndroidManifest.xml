@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".screen.activity.PaymentConfirmationActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.activity.DepositActivity"
             android:exported="false" />
         <activity

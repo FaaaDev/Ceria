@@ -1,6 +1,7 @@
 package com.faadev.ceria.http;
 
 import com.faadev.ceria.http.response.AuthResponse;
+import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.PostResponse;
@@ -52,4 +53,11 @@ public interface ApiInterface {
     @DELETE("like/{post_id}")
     Call<GeneralResponse> unlikePost(@Header("x-access-token") String token,
                                      @Path(value = "post_id") int postId);
+
+    @GET("bank")
+    Call<BankResponse> getBank(@Header("x-access-token") String token);
+
+    @GET("like/{purchase_id}")
+    Call<GeneralResponse> getPurchaseId(@Header("x-access-token") String token,
+                                     @Path(value = "purchase_id") int purchase_id);
 }

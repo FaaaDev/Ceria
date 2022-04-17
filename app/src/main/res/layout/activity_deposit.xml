@@ -103,59 +103,87 @@
                         tools:itemCount="6"
                         tools:listitem="@layout/item_nominal" />
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="65dp"
-                        android:layout_marginHorizontal="30dp"
-                        android:layout_marginTop="20dp">
-
-                        <LinearLayout
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="12dp"
-                            android:background="@drawable/layouting">
+                            android:layout_height="65dp"
+                            android:layout_marginHorizontal="30dp"
+                            android:layout_marginTop="20dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="12dp"
+                                android:background="@drawable/layouting">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/dosis_regular"
+                                    android:text="IDR"
+                                    android:textColor="@color/fontColor"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginHorizontal="10dp"
+                                    android:layout_marginVertical="5dp"
+                                    android:background="#CDCDCD" />
+
+                                <EditText
+                                    android:id="@+id/nominal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="#00000000"
+                                    android:fontFamily="@font/dosis_regular"
+                                    android:hint="10000000"
+                                    android:inputType="number"
+                                    android:textSize="16sp"
+                                    android:imeOptions="actionDone"/>
+                            </LinearLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/dosis_regular"
-                                android:text="IDR"
-                                android:textColor="@color/fontColor"
-                                android:textSize="14sp" />
+                                android:layout_marginLeft="12dp"
+                                android:background="@drawable/background_label"
+                                android:fontFamily="@font/dosis_semibold"
+                                android:text="Nominal"
+                                android:textColor="#1b1b1b"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
 
-                            <LinearLayout
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginHorizontal="10dp"
-                                android:layout_marginVertical="5dp"
-                                android:background="#CDCDCD" />
-
-                            <EditText
-                                android:id="@+id/nominal"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="#00000000"
-                                android:fontFamily="@font/dosis_regular"
-                                android:hint="10000000"
-                                android:inputType="number"
-                                android:textSize="16sp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/error"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="12dp"
-                            android:background="@drawable/background_label"
-                            android:fontFamily="@font/dosis_semibold"
-                            android:text="Nominal"
-                            android:textColor="#1b1b1b"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
+                            android:layout_marginHorizontal="30dp"
+                            android:gravity="center_vertical"
+                            android:visibility="gone">
+                            <ImageView
+                                android:layout_width="14dp"
+                                android:layout_height="14dp"
+                                android:src="@drawable/ic_round_error_24"
+                                android:layout_marginTop="1dp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/background_label"
+                                android:fontFamily="@font/dosis_semibold"
+                                android:text="Minimal pembelian adalah IDR 10000"
+                                android:textColor="#ff0000"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="30dp"
                         android:layout_marginTop="24dp">
 
@@ -169,12 +197,12 @@
                                 android:id="@+id/rv_bank"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="true"
                                 android:paddingTop="10dp"
                                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                                 app:spanCount="3"
                                 tools:itemCount="3"
-                                tools:listitem="@layout/item_bank"
-                                android:nestedScrollingEnabled="true"/>
+                                tools:listitem="@layout/item_bank" />
                         </LinearLayout>
 
                         <TextView

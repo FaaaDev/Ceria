@@ -3,31 +3,51 @@ package com.faadev.ceria.screen.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.AmmountAdapter;
 import com.faadev.ceria.adapter.BankAdapter;
 import com.faadev.ceria.adapter.ItemCLickListener;
 import com.faadev.ceria.databinding.ActivityDepositBinding;
+import com.faadev.ceria.http.ApiService;
+import com.faadev.ceria.http.response.BankResponse;
+import com.faadev.ceria.model.BankModel;
 import com.faadev.ceria.model.NominalModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DepositActivity extends AppCompatActivity {
 
     private ActivityDepositBinding binding;
     private List<NominalModel> nominalModels;
+    private List<BankModel> bankModels;
     private AmmountAdapter adapter;
     private BankAdapter bankAdapter;
     private ItemCLickListener itemCLickListener;
+    private ItemCLickListener bankCLickListener;
     private int current = -1;
+    private int totalAmmount = 0;
+    private int selectedBank = -1;
+    private boolean isMinimum = false;
+    private ApiService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +67,15 @@ public class DepositActivity extends AppCompatActivity {
             this.getWindow().setStatusBarColor(Color.argb(255, 0, 0, 23));
         }
 
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        apiService = new ApiService(getApplicationContext());
         implement();
     }
 
     private void implement() {
         nominalModels = new ArrayList<>();
+        bankModels = new ArrayList<>();
         binding.close.setOnClickListener(v -> onBackPressed());
         nominalModels.add(new NominalModel(20000));
         nominalModels.add(new NominalModel(50000));
@@ -63,12 +87,18 @@ public class DepositActivity extends AppCompatActivity {
         itemCLickListener = position -> {
             if (position > -1) {
                 binding.nominal.setText(String.valueOf(nominalModels.get(position).getNominal()));
+                isMinimum = true;
             } else {
                 binding.nominal.setText("");
             }
             current = position;
 
         };
+
+        bankCLickListener = position -> {
+          selectedBank = position;
+        };
+
 
         binding.nominal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -89,15 +119,74 @@ public class DepositActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 }
                 current = -1;
+
+                if(!TextUtils.isEmpty(editable)) {
+                    System.out.println(editable);
+                    if (!(Integer.parseInt(editable.toString()) >= 10000)) {
+                        binding.error.setVisibility(View.VISIBLE);
+                        isMinimum = false;
+                    } else {
+                        binding.error.setVisibility(View.GONE);
+                        isMinimum = true;
+                    }
+                }
             }
         });
+
+        binding.nominal.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                if (keyCode == 66){
+                    View view = getCurrentFocus();
+                    if (view!=null){
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                }
+            }
+            return false;
+        });
+
 
         adapter = new AmmountAdapter(getApplicationContext(), nominalModels, itemCLickListener);
 
         binding.rvNominal.setAdapter(adapter);
 
-        bankAdapter = new BankAdapter(getApplicationContext());
+        binding.btnAction.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(binding.nominal.getText()) || selectedBank == -1) {
+                if (TextUtils.isEmpty(binding.nominal.getText())) {
+                    binding.nominal.setError("Silahkan isi nominal isi ulang");
+                }
+                if (selectedBank == -1) {
+                    Toast.makeText(getApplicationContext(), "Pilih Metode Pembayaran", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                System.out.println(isMinimum);
+                if (isMinimum) {
+                    startActivity(new Intent(this, PaymentConfirmationActivity.class));
+                    finish();
+                }
+            }
+        });
 
-        binding.rvBank.setAdapter(bankAdapter);
+        getBank();
+    }
+
+    private void getBank() {
+        apiService.getBankList(new Callback<BankResponse>() {
+            @Override
+            public void onResponse(Call<BankResponse> call, Response<BankResponse> response) {
+                if (response.body().getCode() == 200) {
+                    bankModels = response.body().getData();
+                    bankAdapter = new BankAdapter(getApplicationContext(), bankModels, bankCLickListener);
+
+                    binding.rvBank.setAdapter(bankAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BankResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

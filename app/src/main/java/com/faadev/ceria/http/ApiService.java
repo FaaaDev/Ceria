@@ -14,6 +14,7 @@ import android.util.Log;
 import androidx.fragment.app.FragmentActivity;
 
 import com.faadev.ceria.http.response.AuthResponse;
+import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.PostResponse;
@@ -111,5 +112,10 @@ public class ApiService {
     public void unlikePost(int postId, Callback<GeneralResponse> callback) {
         Call<GeneralResponse> likePost = apiInterface.unlikePost(token, postId);
         likePost.enqueue(callback);
+    }
+
+    public void getBankList(Callback<BankResponse> callback) {
+        Call<BankResponse> bank = apiInterface.getBank(token);
+        bank.enqueue(callback);
     }
 }

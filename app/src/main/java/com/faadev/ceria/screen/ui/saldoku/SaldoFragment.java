@@ -41,4 +41,10 @@ public class SaldoFragment extends Fragment {
         adapter = new TransactionAdapter(getContext());
         binding.rvTransaction.setAdapter(adapter);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        System.out.println("ON RESUME SALDOKU");
+    }
 }

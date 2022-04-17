@@ -4,8 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:layout_marginTop="5dp">
+    android:layout_marginTop="5dp"
+    android:id="@+id/item">
     <LinearLayout
+        android:id="@+id/main_component"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -15,15 +17,17 @@
         android:layout_marginVertical="5dp"
         android:background="@drawable/nominal_unselected">
         <ImageView
+            android:id="@+id/logo"
             android:layout_width="50dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_brilogo"/>
     </LinearLayout>
     <TextView
+        android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/dosis_regular"
+        android:fontFamily="@font/dosis_semibold"
         android:text="Bank BRI"
         android:textColor="@color/fontColorSecondary"
-        android:textSize="14sp"/>
+        android:textSize="12sp"/>
 </LinearLayout>
