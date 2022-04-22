@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.faadev.ceria.databinding.ActivityPaymentConfirmationBinding;
+import com.faadev.ceria.utils.DismissListener;
+import com.faadev.ceria.utils.ShowDialog;
 
-public class PaymentConfirmationActivity extends AppCompatActivity {
+public class PaymentConfirmationActivity extends AppCompatActivity implements DismissListener {
 
     private ActivityPaymentConfirmationBinding binding;
 
@@ -46,6 +48,10 @@ public class PaymentConfirmationActivity extends AppCompatActivity {
         binding.btnAction.setOnClickListener(view -> {});
 
         binding.btnCancel.setOnClickListener(view -> {});
+
+        binding.pickImage.setOnClickListener(view -> {
+            ShowDialog.showPicker(getSupportFragmentManager());
+        });
     }
 
     @Override
@@ -53,4 +59,10 @@ public class PaymentConfirmationActivity extends AppCompatActivity {
         super.onBackPressed();
         Toast.makeText(this, "Kamu bisa melanjutkan pembayaran melalui riwayat transaksi", Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onDismissSheet(String from) {
+
+    }
+
 }

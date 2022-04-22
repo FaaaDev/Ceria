@@ -26,7 +26,7 @@ public class DetailPostActivity extends AppCompatActivity {
 
     private ActivityDetailPostBinding binding;
     private BottomDetailBinding bottom;
-    private  Post post = new Post();
+    private Post post = new Post();
     private ApiService apiService;
 
     @Override

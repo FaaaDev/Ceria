@@ -24,8 +24,10 @@ import com.faadev.ceria.adapter.ItemCLickListener;
 import com.faadev.ceria.databinding.ActivityDepositBinding;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.BankResponse;
+import com.faadev.ceria.http.response.PurchaseResponse;
 import com.faadev.ceria.model.BankModel;
 import com.faadev.ceria.model.NominalModel;
+import com.faadev.ceria.utils.ShowDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +98,7 @@ public class DepositActivity extends AppCompatActivity {
         };
 
         bankCLickListener = position -> {
-          selectedBank = position;
+            selectedBank = position;
         };
 
 
@@ -120,7 +122,7 @@ public class DepositActivity extends AppCompatActivity {
                 }
                 current = -1;
 
-                if(!TextUtils.isEmpty(editable)) {
+                if (!TextUtils.isEmpty(editable)) {
                     System.out.println(editable);
                     if (!(Integer.parseInt(editable.toString()) >= 10000)) {
                         binding.error.setVisibility(View.VISIBLE);
@@ -135,9 +137,9 @@ public class DepositActivity extends AppCompatActivity {
 
         binding.nominal.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                if (keyCode == 66){
+                if (keyCode == 66) {
                     View view = getCurrentFocus();
-                    if (view!=null){
+                    if (view != null) {
                         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
                     }
@@ -162,13 +164,22 @@ public class DepositActivity extends AppCompatActivity {
             } else {
                 System.out.println(isMinimum);
                 if (isMinimum) {
-                    startActivity(new Intent(this, PaymentConfirmationActivity.class));
-                    finish();
+                    addPurchase();
                 }
             }
         });
 
         getBank();
+    }
+
+    private void setLoading(boolean loading) {
+        if (loading) {
+            binding.btnLoading.setVisibility(View.VISIBLE);
+            binding.btnAction.setEnabled(false);
+        } else {
+            binding.btnLoading.setVisibility(View.GONE);
+            binding.btnAction.setEnabled(true);
+        }
     }
 
     private void getBank() {
@@ -188,5 +199,30 @@ public class DepositActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void addPurchase() {
+        setLoading(true);
+        apiService.addPurchase(
+                Integer.parseInt(binding.nominal.getText().toString()),
+                bankModels.get(selectedBank).getId(),
+                new Callback<PurchaseResponse>() {
+                    @Override
+                    public void onResponse(Call<PurchaseResponse> call, Response<PurchaseResponse> response) {
+                        setLoading(false);
+                        if(response.body().getCode() == 200) {
+                            startActivity(new Intent(getApplicationContext(), PaymentConfirmationActivity.class));
+                            finish();
+                        } else {
+                            ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal melakukan pembelian");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<PurchaseResponse> call, Throwable t) {
+                        setLoading(false);
+                        ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+                    }
+                });
     }
 }

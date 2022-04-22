@@ -17,7 +17,11 @@ import com.faadev.ceria.http.response.AuthResponse;
 import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
+import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PostResponse;
+import com.faadev.ceria.http.response.PurchaseIdResponse;
+import com.faadev.ceria.http.response.PurchaseResponse;
+import com.faadev.ceria.http.response.TransactionResponse;
 import com.faadev.ceria.utils.CompressImage;
 import com.faadev.ceria.utils.FileUtils;
 import com.faadev.ceria.utils.Preferences;
@@ -117,5 +121,25 @@ public class ApiService {
     public void getBankList(Callback<BankResponse> callback) {
         Call<BankResponse> bank = apiInterface.getBank(token);
         bank.enqueue(callback);
+    }
+
+    public void addPurchase(int total, int bank, Callback<PurchaseResponse> callback) {
+        Call<PurchaseResponse> purchase = apiInterface.addPurchase(token, total, bank);
+        purchase.enqueue(callback);
+    }
+
+    public void myPurchase(Callback<MyPurchaseResponse> callback) {
+        Call<MyPurchaseResponse> purchase = apiInterface.getPurchase(token);
+        purchase.enqueue(callback);
+    }
+
+    public void purchaseId(int id, Callback<PurchaseIdResponse> callback) {
+        Call<PurchaseIdResponse> purchase = apiInterface.getPurchaseId(token, id);
+        purchase.enqueue(callback);
+    }
+
+    public void getTransaction(Callback<TransactionResponse> callback) {
+        Call<TransactionResponse> transaction = apiInterface.getTransaction(token);
+        transaction.enqueue(callback);
     }
 }

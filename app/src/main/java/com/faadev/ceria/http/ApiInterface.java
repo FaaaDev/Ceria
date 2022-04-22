@@ -4,7 +4,11 @@ import com.faadev.ceria.http.response.AuthResponse;
 import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
+import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PostResponse;
+import com.faadev.ceria.http.response.PurchaseIdResponse;
+import com.faadev.ceria.http.response.PurchaseResponse;
+import com.faadev.ceria.http.response.TransactionResponse;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -57,7 +61,19 @@ public interface ApiInterface {
     @GET("bank")
     Call<BankResponse> getBank(@Header("x-access-token") String token);
 
-    @GET("like/{purchase_id}")
-    Call<GeneralResponse> getPurchaseId(@Header("x-access-token") String token,
-                                     @Path(value = "purchase_id") int purchase_id);
+    @GET("purchase/{purchase_id}")
+    Call<PurchaseIdResponse> getPurchaseId(@Header("x-access-token") String token,
+                                           @Path(value = "purchase_id") int purchase_id);
+
+    @FormUrlEncoded
+    @POST("purchase")
+    Call<PurchaseResponse> addPurchase(@Header("x-access-token") String token,
+                                       @Field("total") int total,
+                                       @Field("bank_type") int bank);
+
+    @GET("mypurchase")
+    Call<MyPurchaseResponse> getPurchase(@Header("x-access-token") String token);
+
+    @GET("transaction")
+    Call<TransactionResponse> getTransaction(@Header("x-access-token") String token);
 }

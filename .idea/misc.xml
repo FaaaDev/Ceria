@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.2935185185185185" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable-v21/button_background.xml" value="0.2078125" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable-v24/button_background.xml" value="0.17051282051282052" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/drawable-v24/layouting.xml" value="0.17051282051282052" />
@@ -62,11 +63,13 @@
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/layout/nav_header_main.xml" value="0.12105263157894737" />
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/xml/file_path.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bank_selected.xml" value="0.188" />
+        <entry key="app/src/main/res/drawable/cancel_button.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_bank.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_box.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_brilogo.xml" value="0.188" />
+        <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_card_bg.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_card_bg2.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_empty_illustration.xml" value="0.145" />
@@ -93,8 +96,9 @@
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.24230072463768115" />
         <entry key="app/src/main/res/layout/activity_deposit.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_post.xml" value="0.17755825734549138" />
+        <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_payment_confirmation.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_payment_confirmation.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bottom_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.20108695652173914" />

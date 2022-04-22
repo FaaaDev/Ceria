@@ -36,6 +36,7 @@
             android:orientation="vertical"
             android:layout_weight="1">
             <TextView
+                android:id="@+id/type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="14dp"
@@ -44,15 +45,17 @@
                 android:textColor="@color/fontColor"
                 android:textSize="16sp" />
             <TextView
+                android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="14dp"
                 android:fontFamily="@font/dosis_regular"
-                android:text="IDR 20000"
+                android:text="03/04/2022"
                 android:textColor="@color/fontColorSecondary"
                 android:textSize="12sp"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/coin_affected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
