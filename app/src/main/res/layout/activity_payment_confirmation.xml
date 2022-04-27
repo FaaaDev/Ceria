@@ -124,10 +124,12 @@
                                     android:layout_height="match_parent"
                                     android:background="@color/secondaryColor">
                                     <ImageView
+                                        android:id="@+id/image_bank"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:src="@drawable/ic_bni_logo"
-                                        android:padding="5dp"/>
+                                        android:padding="5dp"
+                                        android:scaleType="centerInside"/>
                                 </LinearLayout>
                             </androidx.cardview.widget.CardView>
 
@@ -139,6 +141,7 @@
                                 android:background="#CDCDCD" />
 
                             <TextView
+                                android:id="@+id/bank_number"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -192,6 +195,7 @@
                                 android:textColor="#C046D3"
                                 android:textSize="14sp" />
                             <TextView
+                                android:id="@+id/bank_alias"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/dosis_medium"
@@ -232,6 +236,7 @@
                         android:textColor="@color/fontColor"
                         android:textSize="14sp" />
                     <TextView
+                        android:id="@+id/total"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="30dp"
@@ -251,6 +256,7 @@
                         android:textColor="@color/fontColor"
                         android:textSize="14sp" />
                     <TextView
+                        android:id="@+id/coin_gained"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="30dp"
@@ -336,7 +342,7 @@
                                 android:layout_centerInParent="true"
                                 android:layout_marginEnd="20dp"
                                 android:layout_toStartOf="@+id/btn_label"
-                                android:indeterminateDrawable="@drawable/progress"
+                                android:indeterminateDrawable="@drawable/progress_red"
                                 android:indeterminateDuration="1000"
                                 android:visibility="gone" />
 

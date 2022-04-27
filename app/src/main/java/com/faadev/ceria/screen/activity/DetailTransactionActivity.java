@@ -87,7 +87,9 @@ public class DetailTransactionActivity extends AppCompatActivity {
         }
 
         binding.btnAction.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), PaymentConfirmationActivity.class));
+            Intent intent = new Intent(getApplicationContext(), PaymentConfirmationActivity.class);
+            intent.putExtra("purchaseId", transactionModel.getPurchase().getId());
+            startActivity(intent);
         });
     }
 
@@ -108,6 +110,8 @@ public class DetailTransactionActivity extends AppCompatActivity {
                     generateStatus(response.body().getData().getPurchase().getStatus());
                     if (response.body().getData().getPurchase().getStatus() == 0) {
                         binding.btnAction.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.btnAction.setVisibility(View.GONE);
                     }
                 }
             }
@@ -134,19 +138,24 @@ public class DetailTransactionActivity extends AppCompatActivity {
 
     private void generateStatus(int status) {
         if (status == 0) {
-            binding.status.setBackgroundColor(Color.parseColor("#FFB302"));
+            binding.status.setBackgroundColor(Color.parseColor("#30FFB302"));
+            binding.statusText.setTextColor(Color.parseColor("#FFB302"));
             binding.statusText.setText("Menunggu Pembayaran");
         } else if (status == 1) {
-            binding.status.setBackgroundColor(Color.parseColor("#FCE83A"));
+            binding.status.setBackgroundColor(Color.parseColor("#3004BD00"));
+            binding.statusText.setTextColor(Color.parseColor("#04BD00"));
             binding.statusText.setText("Menunggu Konfirmasi");
         } else if (status == 2) {
-            binding.status.setBackgroundColor(Color.parseColor("#2DCCFF"));
+            binding.status.setBackgroundColor(Color.parseColor("#302DCCFF"));
+            binding.statusText.setTextColor(Color.parseColor("#2DCCFF"));
             binding.statusText.setText("Berhasil");
         } else if (status == 3) {
-            binding.status.setBackgroundColor(Color.parseColor("#FF0076"));
+            binding.status.setBackgroundColor(Color.parseColor("#30FF0076"));
+            binding.statusText.setTextColor(Color.parseColor("#FF0076"));
             binding.statusText.setText("Ditolak");
         } else {
-            binding.status.setBackgroundColor(Color.parseColor("#9EA7AD"));
+            binding.status.setBackgroundColor(Color.parseColor("#309EA7AD"));
+            binding.statusText.setTextColor(Color.parseColor("#9EA7AD"));
             binding.statusText.setText("Dibatalkan");
         }
     }

@@ -142,4 +142,27 @@ public class ApiService {
         Call<TransactionResponse> transaction = apiInterface.getTransaction(token);
         transaction.enqueue(callback);
     }
+
+    public void confirmPayment(int id, Uri illustration, Callback<GeneralResponse> callback) {
+
+        uploadImage(illustration, new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.isSuccessful()) {
+                    Call<GeneralResponse> confirm = apiInterface.confirmPurchase(token, id, response.body().getMessage());
+                    confirm.enqueue(callback);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                ShowDialog.showError(((FragmentActivity) context).getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
+    public void cancelPurchase(int id, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> cancel = apiInterface.cancelPurchase(token, id);
+        cancel.enqueue(callback);
+    }
 }

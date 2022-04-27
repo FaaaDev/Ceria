@@ -3,6 +3,7 @@ package com.faadev.ceria.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.faadev.ceria.R;
 import com.faadev.ceria.databinding.ItemTransactionBinding;
 import com.faadev.ceria.http.response.PurchaseData;
 import com.faadev.ceria.model.TransactionModel;
@@ -44,8 +46,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         if (data.getType().equals("b")) {
             holder.binding.type.setText("Isi Ulang");
+            holder.binding.status.setImageResource(R.drawable.ic_add);
         } else {
             holder.binding.type.setText("Penarikan");
+            holder.binding.status.setImageResource(R.drawable.ic_minus);
         }
 
         try {
@@ -56,6 +60,22 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             holder.binding.date.setText(outputFormat.format(date));
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        if (data.getStatus() == 0) {
+            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#30FFB302"));
+            holder.binding.status.setImageResource(R.drawable.ic_waiting);
+        } else if (data.getStatus() == 1) {
+            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#3004BD00"));
+            holder.binding.status.setImageResource(R.drawable.ic_confirm);
+        } else if (data.getStatus() == 2) {
+            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#2DCCFF"));
+        } else if (data.getStatus() == 3) {
+            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#FF0076"));
+            holder.binding.status.setImageResource(R.drawable.ic_cancel);
+        } else {
+            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#9EA7AD"));
+            holder.binding.status.setImageResource(R.drawable.ic_cancel);
         }
 
         holder.binding.coinAffected.setText(data.getCoinAffected()+" Coin");
@@ -80,4 +100,5 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             this.binding = binding;
         }
     }
+    
 }

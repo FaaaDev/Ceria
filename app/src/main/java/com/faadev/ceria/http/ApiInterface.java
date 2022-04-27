@@ -19,6 +19,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
@@ -64,6 +65,16 @@ public interface ApiInterface {
     @GET("purchase/{purchase_id}")
     Call<PurchaseIdResponse> getPurchaseId(@Header("x-access-token") String token,
                                            @Path(value = "purchase_id") int purchase_id);
+
+    @FormUrlEncoded
+    @POST("purchase/{purchase_id}")
+    Call<GeneralResponse> confirmPurchase(@Header("x-access-token") String token,
+                                          @Path(value = "purchase_id") int purchase_id,
+                                          @Field("bukti") String bukti);
+
+    @PUT("cancel-purchase/{purchase_id}")
+    Call<GeneralResponse> cancelPurchase(@Header("x-access-token") String token,
+                                          @Path(value = "purchase_id") int purchase_id);
 
     @FormUrlEncoded
     @POST("purchase")

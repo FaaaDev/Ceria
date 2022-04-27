@@ -211,7 +211,9 @@ public class DepositActivity extends AppCompatActivity {
                     public void onResponse(Call<PurchaseResponse> call, Response<PurchaseResponse> response) {
                         setLoading(false);
                         if(response.body().getCode() == 200) {
-                            startActivity(new Intent(getApplicationContext(), PaymentConfirmationActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), PaymentConfirmationActivity.class);
+                            intent.putExtra("purchaseId", response.body().getData().getId());
+                            startActivity(intent);
                             finish();
                         } else {
                             ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal melakukan pembelian");

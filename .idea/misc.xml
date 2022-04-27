@@ -64,29 +64,37 @@
         <entry key="..\:/Users/Elitebook/Documents/Ceria/app/src/main/res/xml/file_path.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bank_selected.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/cancel_button.xml" value="0.1585" />
+        <entry key="app/src/main/res/drawable/cancel_button_alt.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_bank.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_box.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_brilogo.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.1585" />
+        <entry key="app/src/main/res/drawable/ic_cancel.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_card_bg.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_card_bg2.xml" value="0.145" />
+        <entry key="app/src/main/res/drawable/ic_confirm.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_empty_illustration.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_home_basil.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_minus.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_moon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_round_content_copy_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_round_dashboard_24.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_round_error_24.xml" value="0.1565" />
+        <entry key="app/src/main/res/drawable/ic_sand_watch.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_settings_basil.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_toggle_off.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_toggle_on.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_waiting.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_wallet.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/layouting.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/nominal_selected.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/nominal_unselected.xml" value="0.188" />
+        <entry key="app/src/main/res/drawable/progress.xml" value="0.16" />
+        <entry key="app/src/main/res/drawable/progress_red.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/root_card.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/root_default.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/root_slide.xml" value="0.1465" />
@@ -100,6 +108,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_payment_confirmation.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bottom_detail.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_cancel_confirmation.xml" value="0.2079533941236069" />
+        <entry key="app/src/main/res/layout/fragment_delete_confirmation.xml" value="0.2079533941236069" />
+        <entry key="app/src/main/res/layout/fragment_error.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17755825734549138" />
