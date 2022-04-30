@@ -17,10 +17,12 @@ import com.faadev.ceria.http.response.AuthResponse;
 import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
+import com.faadev.ceria.http.response.MyCoinResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
 import com.faadev.ceria.http.response.PurchaseResponse;
+import com.faadev.ceria.http.response.RateResponse;
 import com.faadev.ceria.http.response.TransactionResponse;
 import com.faadev.ceria.utils.CompressImage;
 import com.faadev.ceria.utils.FileUtils;
@@ -164,5 +166,15 @@ public class ApiService {
     public void cancelPurchase(int id, Callback<GeneralResponse> callback) {
         Call<GeneralResponse> cancel = apiInterface.cancelPurchase(token, id);
         cancel.enqueue(callback);
+    }
+
+    public void getMyCoin(Callback<MyCoinResponse> callback) {
+        Call<MyCoinResponse> coin = apiInterface.getCoin(token);
+        coin.enqueue(callback);
+    }
+
+    public void getRate(Callback<RateResponse> callback) {
+        Call<RateResponse> rate = apiInterface.getRate(token);
+        rate.enqueue(callback);
     }
 }

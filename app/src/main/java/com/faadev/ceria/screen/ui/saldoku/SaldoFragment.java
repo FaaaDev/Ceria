@@ -14,13 +14,17 @@ import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.TransactionAdapter;
 import com.faadev.ceria.databinding.FragmentSaldoBinding;
 import com.faadev.ceria.http.ApiService;
+import com.faadev.ceria.http.response.MyCoinResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PurchaseData;
+import com.faadev.ceria.http.response.RateResponse;
 import com.faadev.ceria.http.response.TransactionResponse;
 import com.faadev.ceria.model.TransactionModel;
 import com.faadev.ceria.screen.activity.DepositActivity;
 import com.faadev.ceria.utils.ShowDialog;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +38,7 @@ public class SaldoFragment extends Fragment {
     private TransactionAdapter adapter;
     private ApiService apiService;
     private List<TransactionModel> purchaseDataList;
+    private int sellRate = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSaldoBinding.inflate(inflater, container, false);
@@ -58,7 +63,7 @@ public class SaldoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getHistory();
+        getRate();
     }
 
     private void hasData(boolean data) {
@@ -93,5 +98,59 @@ public class SaldoFragment extends Fragment {
                 hasData(false);
             }
         });
+    }
+
+    private void getCoin() {
+        apiService = new ApiService(getContext());
+        apiService.getMyCoin(new Callback<MyCoinResponse>() {
+            @Override
+            public void onResponse(Call<MyCoinResponse> call, Response<MyCoinResponse> response) {
+                if (response.body().getCode() == 200) {
+                    binding.myCoin.setText(response.body().getData().getTotal()+ " Coin");
+                    binding.estimate.setText(intToIdr(response.body().getData().getTotal()*sellRate));
+                    getHistory();
+                } else {
+                    ShowDialog.showError(getChildFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MyCoinResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getRate() {
+        apiService = new ApiService(getContext());
+        apiService.getRate(new Callback<RateResponse>() {
+            @Override
+            public void onResponse(Call<RateResponse> call, Response<RateResponse> response) {
+                if (response.body().getCode() == 200) {
+                    sellRate = response.body().getData().getSellPrice();
+                    getCoin();
+                } else {
+                    ShowDialog.showError(getChildFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RateResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private String intToIdr(int value) {
+        DecimalFormat purchase = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols total = new DecimalFormatSymbols();
+
+        total.setCurrencySymbol("IDR ");
+        total.setMonetaryDecimalSeparator(',');
+        total.setGroupingSeparator('.');
+
+        purchase.setDecimalFormatSymbols(total);
+
+        return purchase.format(value).replace(",00", "");
     }
 }

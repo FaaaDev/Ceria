@@ -46,7 +46,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
         if (data.getType().equals("b")) {
             holder.binding.type.setText("Isi Ulang");
-            holder.binding.status.setImageResource(R.drawable.ic_add);
+            holder.binding.status.setImageResource(R.drawable.ic_add_color);
         } else {
             holder.binding.type.setText("Penarikan");
             holder.binding.status.setImageResource(R.drawable.ic_minus);
@@ -69,12 +69,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             holder.binding.statusBg.setBackgroundColor(Color.parseColor("#3004BD00"));
             holder.binding.status.setImageResource(R.drawable.ic_confirm);
         } else if (data.getStatus() == 2) {
-            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#2DCCFF"));
+            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#302DCCFF"));
         } else if (data.getStatus() == 3) {
-            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#FF0076"));
-            holder.binding.status.setImageResource(R.drawable.ic_cancel);
+            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#30FF0076"));
+            holder.binding.status.setImageResource(R.drawable.ic_reject);
         } else {
-            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#9EA7AD"));
+            holder.binding.statusBg.setBackgroundColor(Color.parseColor("#309EA7AD"));
             holder.binding.status.setImageResource(R.drawable.ic_cancel);
         }
 

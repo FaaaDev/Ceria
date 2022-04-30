@@ -66,6 +66,7 @@
         <entry key="app/src/main/res/drawable/cancel_button.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/cancel_button_alt.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.145" />
+        <entry key="app/src/main/res/drawable/ic_add_color.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_bank.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_box.xml" value="0.1" />
@@ -81,6 +82,7 @@
         <entry key="app/src/main/res/drawable/ic_minus.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_moon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_reject.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_round_content_copy_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_round_dashboard_24.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_round_error_24.xml" value="0.1565" />

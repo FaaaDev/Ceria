@@ -43,6 +43,7 @@
                         android:textColor="#ffffff"
                         android:textSize="18sp" />
                     <TextView
+                        android:id="@+id/my_coin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_bold"
@@ -51,6 +52,7 @@
                         android:textSize="26sp"
                         android:layout_marginTop="14dp"/>
                     <TextView
+                        android:id="@+id/estimate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/dosis_regular"

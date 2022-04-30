@@ -4,10 +4,12 @@ import com.faadev.ceria.http.response.AuthResponse;
 import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
+import com.faadev.ceria.http.response.MyCoinResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
 import com.faadev.ceria.http.response.PurchaseResponse;
+import com.faadev.ceria.http.response.RateResponse;
 import com.faadev.ceria.http.response.TransactionResponse;
 
 import okhttp3.MultipartBody;
@@ -87,4 +89,10 @@ public interface ApiInterface {
 
     @GET("transaction")
     Call<TransactionResponse> getTransaction(@Header("x-access-token") String token);
+
+    @GET("mycoin")
+    Call<MyCoinResponse> getCoin(@Header("x-access-token") String token);
+
+    @GET("rate")
+    Call<RateResponse> getRate(@Header("x-access-token") String token);
 }
