@@ -129,10 +129,10 @@
                             android:layout_marginTop="12dp"
                             android:background="@drawable/layouting"
                             android:fontFamily="@font/dosis_regular"
+                            android:gravity="center_vertical"
                             android:hint="Pilih Kategori"
                             android:inputType="text"
-                            android:textSize="16sp"
-                            android:gravity="center_vertical"/>
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"

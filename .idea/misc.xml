@@ -109,13 +109,17 @@
         <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_payment_confirmation.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_withdraw.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/bottom_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_cancel_confirmation.xml" value="0.2079533941236069" />
+        <entry key="app/src/main/res/layout/fragment_category.xml" value="0.20697463768115942" />
+        <entry key="app/src/main/res/layout/fragment_create_payment_profile.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/fragment_delete_confirmation.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/fragment_error.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17755825734549138" />
+        <entry key="app/src/main/res/layout/fragment_payment_profile.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/fragment_saldo.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_bank.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/item_nominal.xml" value="0.21875" />

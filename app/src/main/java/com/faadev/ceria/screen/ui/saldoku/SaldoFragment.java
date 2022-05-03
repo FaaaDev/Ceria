@@ -21,6 +21,7 @@ import com.faadev.ceria.http.response.RateResponse;
 import com.faadev.ceria.http.response.TransactionResponse;
 import com.faadev.ceria.model.TransactionModel;
 import com.faadev.ceria.screen.activity.DepositActivity;
+import com.faadev.ceria.screen.activity.WithdrawActivity;
 import com.faadev.ceria.utils.ShowDialog;
 
 import java.text.DecimalFormat;
@@ -39,6 +40,7 @@ public class SaldoFragment extends Fragment {
     private ApiService apiService;
     private List<TransactionModel> purchaseDataList;
     private int sellRate = 0;
+    private int coin = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSaldoBinding.inflate(inflater, container, false);
@@ -54,7 +56,12 @@ public class SaldoFragment extends Fragment {
     }
 
     private void implement() {
-        binding.wd.setOnClickListener(v -> {});
+        binding.wd.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), WithdrawActivity.class);
+            intent.putExtra("rate", sellRate);
+            intent.putExtra("coin", coin);
+            startActivity(intent);
+        });
         binding.topup.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), DepositActivity.class));
         });
@@ -106,6 +113,7 @@ public class SaldoFragment extends Fragment {
             @Override
             public void onResponse(Call<MyCoinResponse> call, Response<MyCoinResponse> response) {
                 if (response.body().getCode() == 200) {
+                    coin = response.body().getData().getTotal();
                     binding.myCoin.setText(response.body().getData().getTotal()+ " Coin");
                     binding.estimate.setText(intToIdr(response.body().getData().getTotal()*sellRate));
                     getHistory();
