@@ -264,14 +264,13 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
                 pickFromGallery();
             } else if (from.equals("camera")) {
                 pickFromCamera();
-            } else {
-                if (categoryModelList.size() > 0) {
-                    for (int i = 0; i < categoryModelList.size(); i++) {
-                        if (from.equals(String.valueOf(categoryModelList.get(i).getId()))) {
-                            categoryModel = categoryModelList.get(i);
-                            categoryId = categoryModel.getId();
-                            binding.category.setText(categoryModel.getCategory());
-                        }
+            } else if (from.contains("options:")){
+                int position = Integer.parseInt(from.replace("options:", ""));
+                for (int i = 0; i < categoryModelList.size(); i++) {
+                    if (categoryModelList.get(i).getId() == position) {
+                        categoryModel = categoryModelList.get(i);
+                        categoryId = categoryModel.getId();
+                        binding.category.setText(categoryModel.getCategory());
                     }
                 }
             }

@@ -18,6 +18,12 @@ public class CategoryModel implements Serializable {
         this.selected = selected;
     }
 
+    public CategoryModel(int id, String category, boolean selected) {
+        this.id = id;
+        this.category = category;
+        this.selected = selected;
+    }
+
     public CategoryModel() {
     }
 

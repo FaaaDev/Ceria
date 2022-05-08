@@ -13,7 +13,9 @@ import com.faadev.ceria.R;
 import com.faadev.ceria.databinding.ActivityDetailTransactionBinding;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
+import com.faadev.ceria.http.response.WithdrawIdResponse;
 import com.faadev.ceria.model.TransactionModel;
+import com.faadev.ceria.model.WithdrawModel;
 import com.faadev.ceria.utils.GlideApp;
 
 import java.text.DecimalFormat;
@@ -84,6 +86,15 @@ public class DetailTransactionActivity extends AppCompatActivity {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
+            if (transactionModel.getType().equals("b")) {
+                binding.purchaseDetail.setVisibility(View.VISIBLE);
+                binding.wdDetail.setVisibility(View.GONE);
+            } else {
+                binding.purchaseDetail.setVisibility(View.GONE);
+                binding.wdDetail.setVisibility(View.VISIBLE);
+                binding.detailTotal.setText("Total Penarikan");
+            }
         }
 
         binding.btnAction.setOnClickListener(v -> {
@@ -94,33 +105,56 @@ public class DetailTransactionActivity extends AppCompatActivity {
     }
 
     private void getDetail() {
-        apiService.purchaseId(transactionModel.getPurchase().getId(), new Callback<PurchaseIdResponse>() {
-            @Override
-            public void onResponse(Call<PurchaseIdResponse> call, Response<PurchaseIdResponse> response) {
-                if (response.body().getCode() == 200) {
-                    GlideApp.with(getApplicationContext())
-                            .load(response.body().getData().getBank().getImage())
-                            .into(binding.imageBank);
-                    binding.bankNumber.setText(response.body().getData().getBank().getNoRek());
-                    binding.invoice.setText(response.body().getData().getPurchase().getInvoice());
+        if (transactionModel.getType().equals("b")) {
+            apiService.purchaseId(transactionModel.getPurchase().getId(), new Callback<PurchaseIdResponse>() {
+                @Override
+                public void onResponse(Call<PurchaseIdResponse> call, Response<PurchaseIdResponse> response) {
+                    if (response.body().getCode() == 200) {
+                        GlideApp.with(getApplicationContext())
+                                .load(response.body().getData().getBank().getImage())
+                                .into(binding.imageBank);
+                        binding.bankNumber.setText(response.body().getData().getBank().getNoRek());
+                        binding.invoice.setText(response.body().getData().getPurchase().getInvoice());
 
-                    binding.total.setText(intToIdr(response.body().getData().getPurchase().getTotalPurchase()));
-                    binding.totalDetail.setText(intToIdr(response.body().getData().getPurchase().getTotalPurchase()));
-                    binding.totalFinal.setText(intToIdr(response.body().getData().getPurchase().getTotalPurchase()));
-                    generateStatus(response.body().getData().getPurchase().getStatus());
-                    if (response.body().getData().getPurchase().getStatus() == 0) {
-                        binding.btnAction.setVisibility(View.VISIBLE);
-                    } else {
-                        binding.btnAction.setVisibility(View.GONE);
+                        binding.total.setText(intToIdr(response.body().getData().getPurchase().getTotalPurchase()));
+                        binding.totalDetail.setText(intToIdr(response.body().getData().getPurchase().getTotalPurchase()));
+                        binding.totalFinal.setText(intToIdr(response.body().getData().getPurchase().getTotalPurchase()));
+                        generateStatus(response.body().getData().getPurchase().getStatus());
+                        if (response.body().getData().getPurchase().getStatus() == 0) {
+                            binding.btnAction.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.btnAction.setVisibility(View.GONE);
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<PurchaseIdResponse> call, Throwable t) {
+                @Override
+                public void onFailure(Call<PurchaseIdResponse> call, Throwable t) {
 
-            }
-        });
+                }
+            });
+        } else {
+            apiService.withdrawId(transactionModel.getWithdraw().getId(), new Callback<WithdrawIdResponse>() {
+                @Override
+                public void onResponse(Call<WithdrawIdResponse> call, Response<WithdrawIdResponse> response) {
+                    if (response.body().getCode() == 200) {
+                        WithdrawModel data = response.body().getData();
+                        binding.profileBank.setText(data.getProfile().getBank().getBankName());
+                        binding.profileBankAlias.setText(data.getProfile().getBank_alias());
+                        binding.profileBankNumber.setText(data.getProfile().getBank_number());
+                        binding.totalWd.setText(intToIdr(data.getAmount()));
+                        generateStatus(data.getStatus());
+                        binding.totalDetail.setText(intToIdr(data.getAmount()));
+                        binding.totalFinal.setText(intToIdr(data.getAmount()));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<WithdrawIdResponse> call, Throwable t) {
+
+                }
+            });
+        }
     }
 
     private String intToIdr(int value) {
@@ -145,14 +179,23 @@ public class DetailTransactionActivity extends AppCompatActivity {
             binding.status.setBackgroundColor(Color.parseColor("#3004BD00"));
             binding.statusText.setTextColor(Color.parseColor("#04BD00"));
             binding.statusText.setText("Menunggu Konfirmasi");
+            binding.statusWd.setBackgroundColor(Color.parseColor("#3004BD00"));
+            binding.statusTextWd.setTextColor(Color.parseColor("#04BD00"));
+            binding.statusTextWd.setText("Menunggu Konfirmasi");
         } else if (status == 2) {
             binding.status.setBackgroundColor(Color.parseColor("#302DCCFF"));
             binding.statusText.setTextColor(Color.parseColor("#2DCCFF"));
             binding.statusText.setText("Berhasil");
+            binding.statusWd.setBackgroundColor(Color.parseColor("#302DCCFF"));
+            binding.statusTextWd.setTextColor(Color.parseColor("#2DCCFF"));
+            binding.statusTextWd.setText("Berhasil");
         } else if (status == 3) {
             binding.status.setBackgroundColor(Color.parseColor("#30FF0076"));
             binding.statusText.setTextColor(Color.parseColor("#FF0076"));
             binding.statusText.setText("Ditolak");
+            binding.statusWd.setBackgroundColor(Color.parseColor("#30FF0076"));
+            binding.statusTextWd.setTextColor(Color.parseColor("#FF0076"));
+            binding.statusTextWd.setText("Ditolak");
         } else {
             binding.status.setBackgroundColor(Color.parseColor("#309EA7AD"));
             binding.statusText.setTextColor(Color.parseColor("#9EA7AD"));

@@ -85,7 +85,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                         notifyDataSetChanged();
                     }
 
-                    itemCLickListener.onItemClick(position);
+                    itemCLickListener.onItemClick(data.getId());
                 }, 200);
             });
         } else {
@@ -105,11 +105,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                     notifyDataSetChanged();
                 }
 
-                if ("Semua Kategori".equals(data.getCategory())){
-                    itemCLickListener.onItemClick(position);
-                } else {
-                    itemCLickListener.onItemClick(position);
-                }
+                itemCLickListener.onItemClick(data.getId());
             });
         }
     }

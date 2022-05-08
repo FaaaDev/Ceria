@@ -141,9 +141,9 @@
                                     android:background="#00000000"
                                     android:fontFamily="@font/dosis_regular"
                                     android:hint="10000000"
+                                    android:imeOptions="actionDone"
                                     android:inputType="number"
-                                    android:textSize="16sp"
-                                    android:imeOptions="actionDone"/>
+                                    android:textSize="16sp" />
                             </LinearLayout>
 
                             <TextView

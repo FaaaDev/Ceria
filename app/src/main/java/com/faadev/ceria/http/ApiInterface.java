@@ -1,16 +1,19 @@
 package com.faadev.ceria.http;
 
 import com.faadev.ceria.http.response.AuthResponse;
+import com.faadev.ceria.http.response.BankListResponse;
 import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.MyCoinResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
+import com.faadev.ceria.http.response.PaymentProfileResponse;
 import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
 import com.faadev.ceria.http.response.PurchaseResponse;
 import com.faadev.ceria.http.response.RateResponse;
 import com.faadev.ceria.http.response.TransactionResponse;
+import com.faadev.ceria.http.response.WithdrawIdResponse;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
@@ -76,7 +79,7 @@ public interface ApiInterface {
 
     @PUT("cancel-purchase/{purchase_id}")
     Call<GeneralResponse> cancelPurchase(@Header("x-access-token") String token,
-                                          @Path(value = "purchase_id") int purchase_id);
+                                         @Path(value = "purchase_id") int purchase_id);
 
     @FormUrlEncoded
     @POST("purchase")
@@ -95,4 +98,27 @@ public interface ApiInterface {
 
     @GET("rate")
     Call<RateResponse> getRate(@Header("x-access-token") String token);
+
+    @GET("bank-list")
+    Call<BankListResponse> getBankList(@Header("x-access-token") String token);
+
+    @FormUrlEncoded
+    @POST("payment-profile")
+    Call<GeneralResponse> paymentProfile(@Header("x-access-token") String token,
+                                         @Field("bank") String bank,
+                                         @Field("bank_alias") String alias,
+                                         @Field("bank_number") String number);
+
+    @GET("payment-profile")
+    Call<PaymentProfileResponse> getPaymentProfile(@Header("x-access-token") String token);
+
+    @FormUrlEncoded
+    @POST("withdraw")
+    Call<GeneralResponse> withdrawRequest(@Header("x-access-token") String token,
+                                         @Field("profile_id") int profile,
+                                         @Field("coin_affected") int coin);
+
+    @GET("withdraw/{withdraw_id}")
+    Call<WithdrawIdResponse> getWithdrawId(@Header("x-access-token") String token,
+                                           @Path(value = "withdraw_id") int withdraw);
 }

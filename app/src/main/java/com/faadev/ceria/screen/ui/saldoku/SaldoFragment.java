@@ -103,6 +103,8 @@ public class SaldoFragment extends Fragment {
             @Override
             public void onFailure(Call<TransactionResponse> call, Throwable t) {
                 hasData(false);
+                System.out.println(t.getMessage());
+                ShowDialog.showError(getChildFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
             }
         });
     }

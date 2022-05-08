@@ -7,26 +7,39 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
 import com.faadev.ceria.R;
-import com.faadev.ceria.databinding.FragmentErrorBinding;
+import com.faadev.ceria.adapter.ItemCLickListener;
+import com.faadev.ceria.adapter.PaymentProfileAdapter;
 import com.faadev.ceria.databinding.FragmentPaymentProfileBinding;
+import com.faadev.ceria.model.PaymentProfileModel;
 import com.faadev.ceria.utils.DismissListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class PaymentProfileFragment extends BottomSheetDialogFragment {
 
     private FragmentPaymentProfileBinding binding;
     private DismissListener listener;
     private String from;
+    private ItemCLickListener itemCLickListener;
+    private List<PaymentProfileModel> data;
+    protected List<PaymentProfileModel> search;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +71,12 @@ public class PaymentProfileFragment extends BottomSheetDialogFragment {
 
         binding = FragmentPaymentProfileBinding.inflate(inflater, container, false);
 
+        if (getArguments() != null) {
+            data = (List<PaymentProfileModel>) getArguments().getSerializable("data");
+        } else {
+            data = new ArrayList<>();
+        }
+
         return binding.getRoot();
     }
 
@@ -70,6 +89,89 @@ public class PaymentProfileFragment extends BottomSheetDialogFragment {
             dismiss();
         });
 
+        itemCLickListener = param -> {
+            from = "profile:"+param;
+            dismiss();
+        };
+
+        if (data.size() > 0) {
+            binding.rvProfile.setAdapter(new PaymentProfileAdapter(getContext(), data, itemCLickListener));
+            binding.rvProfile.setVisibility(View.VISIBLE);
+            binding.emptyData.setVisibility(View.GONE);
+        } else {
+            binding.rvProfile.setVisibility(View.GONE);
+            binding.emptyData.setVisibility(View.VISIBLE);
+        }
+
+        binding.search.setVisibility(View.VISIBLE);
+
+        binding.searchField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s != null) {
+                    search(s.toString());
+                } else {
+                    if (data.size() > 0) {
+                        binding.rvProfile.setAdapter(new PaymentProfileAdapter(getContext(), data, itemCLickListener));
+                        binding.rvProfile.setVisibility(View.VISIBLE);
+                        binding.emptyData.setVisibility(View.GONE);
+                    } else {
+                        binding.rvProfile.setVisibility(View.GONE);
+                        binding.emptyData.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
+        binding.searchField.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_DOWN)
+            {
+                System.out.println("KODE : "+keyCode);
+                if (keyCode == 66){
+                    View vi = Objects.requireNonNull(getActivity()).getCurrentFocus();
+                    if (vi!=null){
+                        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
+                }
+            }
+            return false;
+        });
+
+
+        Objects.requireNonNull(getActivity()).getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+    }
+
+    private void search(String param){
+        search = new ArrayList<>();
+        if (data.size() > 0) {
+            for (PaymentProfileModel z : data) {
+                if (z.getBank().getBankName().toLowerCase().contains(param.toLowerCase()) ||
+                        z.getBank_alias().toLowerCase().contains(param.toLowerCase()) ||
+                        z.getBank_number().toLowerCase().contains(param.toLowerCase())) {
+                    search.add(z);
+                }
+            }
+        }
+
+        if (search.size() > 0) {
+            binding.rvProfile.setAdapter(new PaymentProfileAdapter(getContext(), search, itemCLickListener));
+            binding.rvProfile.setVisibility(View.VISIBLE);
+            binding.emptyData.setVisibility(View.GONE);
+        } else {
+            binding.rvProfile.setVisibility(View.GONE);
+            binding.emptyData.setVisibility(View.VISIBLE);
+        }
     }
 
 

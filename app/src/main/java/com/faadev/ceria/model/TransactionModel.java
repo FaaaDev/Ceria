@@ -17,6 +17,8 @@ public class TransactionModel implements Serializable {
     private int status;
     @SerializedName("purchase")
     private PurchaseModel purchase;
+    @SerializedName("withdraw")
+    private WithdrawModel withdraw;
 
     public TransactionModel() {
     }
@@ -67,5 +69,13 @@ public class TransactionModel implements Serializable {
 
     public void setPurchase(PurchaseModel purchase) {
         this.purchase = purchase;
+    }
+
+    public WithdrawModel getWithdraw() {
+        return withdraw;
+    }
+
+    public void setWithdraw(WithdrawModel withdraw) {
+        this.withdraw = withdraw;
     }
 }

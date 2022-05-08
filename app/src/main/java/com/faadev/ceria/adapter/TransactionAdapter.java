@@ -50,6 +50,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         } else {
             holder.binding.type.setText("Penarikan");
             holder.binding.status.setImageResource(R.drawable.ic_minus);
+            holder.binding.coinAffected.setTextColor(Color.parseColor("#ff0000"));
         }
 
         try {

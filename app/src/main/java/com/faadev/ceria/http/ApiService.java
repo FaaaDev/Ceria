@@ -14,16 +14,19 @@ import android.util.Log;
 import androidx.fragment.app.FragmentActivity;
 
 import com.faadev.ceria.http.response.AuthResponse;
+import com.faadev.ceria.http.response.BankListResponse;
 import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.MyCoinResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
+import com.faadev.ceria.http.response.PaymentProfileResponse;
 import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
 import com.faadev.ceria.http.response.PurchaseResponse;
 import com.faadev.ceria.http.response.RateResponse;
 import com.faadev.ceria.http.response.TransactionResponse;
+import com.faadev.ceria.http.response.WithdrawIdResponse;
 import com.faadev.ceria.utils.CompressImage;
 import com.faadev.ceria.utils.FileUtils;
 import com.faadev.ceria.utils.Preferences;
@@ -176,5 +179,30 @@ public class ApiService {
     public void getRate(Callback<RateResponse> callback) {
         Call<RateResponse> rate = apiInterface.getRate(token);
         rate.enqueue(callback);
+    }
+
+    public void getBank(Callback<BankListResponse> callback) {
+        Call<BankListResponse> bank = apiInterface.getBankList(token);
+        bank.enqueue(callback);
+    }
+
+    public void addPaymentProfile(String bank, String name, String number, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> profile = apiInterface.paymentProfile(token, bank, name, number);
+        profile.enqueue(callback);
+    }
+
+    public void getPayment(Callback<PaymentProfileResponse> callback) {
+        Call<PaymentProfileResponse> profile = apiInterface.getPaymentProfile(token);
+        profile.enqueue(callback);
+    }
+
+    public void withdrawRequest(int profile, int coin, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> wd = apiInterface.withdrawRequest(token, profile, coin);
+        wd.enqueue(callback);
+    }
+
+    public void withdrawId(int id, Callback<WithdrawIdResponse> callback) {
+        Call<WithdrawIdResponse> wd = apiInterface.getWithdrawId(token, id);
+        wd.enqueue(callback);
     }
 }
