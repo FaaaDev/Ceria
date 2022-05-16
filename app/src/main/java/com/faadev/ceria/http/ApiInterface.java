@@ -6,6 +6,7 @@ import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.MyCoinResponse;
+import com.faadev.ceria.http.response.MyPostResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PaymentProfileResponse;
 import com.faadev.ceria.http.response.PostResponse;
@@ -121,4 +122,7 @@ public interface ApiInterface {
     @GET("withdraw/{withdraw_id}")
     Call<WithdrawIdResponse> getWithdrawId(@Header("x-access-token") String token,
                                            @Path(value = "withdraw_id") int withdraw);
+
+    @GET("post")
+    Call<MyPostResponse> getMyPost(@Header("x-access-token") String token);
 }

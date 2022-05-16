@@ -83,18 +83,24 @@
         <entry key="app/src/main/res/drawable/ic_moon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_reject.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_round_category_24.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_round_content_copy_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_round_dashboard_24.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_round_error_24.xml" value="0.1565" />
+        <entry key="app/src/main/res/drawable/ic_round_monetization_on_green.xml" value="0.16" />
+        <entry key="app/src/main/res/drawable/ic_round_monetization_on_grey.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_sand_watch.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_settings_basil.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/ic_toggle_off.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_toggle_off_black.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_toggle_on.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_toggle_on_green.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_waiting.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_wallet.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/layouting.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/nominal_selected.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/nominal_unselected.xml" value="0.188" />
+        <entry key="app/src/main/res/drawable/outline_card.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/progress.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/progress_red.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/root_card.xml" value="0.131" />
@@ -105,6 +111,7 @@
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/activity_create_post.xml" value="0.24230072463768115" />
         <entry key="app/src/main/res/layout/activity_deposit.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_detail_my_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_post.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
@@ -117,7 +124,11 @@
         <entry key="app/src/main/res/layout/fragment_delete_confirmation.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/fragment_error.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17755825734549138" />
+        <entry key="app/src/main/res/layout/fragment_list_post.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_list_reject.xml" value="0.2079533941236069" />
+        <entry key="app/src/main/res/layout/fragment_list_wating_post.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.20108695652173914" />
+        <entry key="app/src/main/res/layout/fragment_my_post.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/fragment_payment_profile.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/fragment_saldo.xml" value="0.25" />
@@ -125,6 +136,7 @@
         <entry key="app/src/main/res/layout/item_category_vertical.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/item_nominal.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/item_payment_profile.xml" value="0.2730390908061594" />
+        <entry key="app/src/main/res/layout/item_post.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_transaction.xml" value="0.335" />
         <entry key="app/src/main/res/layout/main_content.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.335" />

@@ -9,28 +9,17 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.faadev.ceria.R;
-import com.faadev.ceria.adapter.CategoryAdapter;
-import com.faadev.ceria.adapter.ItemCLickListener;
-import com.faadev.ceria.adapter.TabAdapter;
-import com.faadev.ceria.model.CategoryModel;
 import com.faadev.ceria.screen.ui.saldoku.SaldoFragment;
 import com.faadev.ceria.screen.ui.home.HomeFragment;
-import com.faadev.ceria.screen.ui.notifications.NotificationsFragment;
+import com.faadev.ceria.screen.ui.my_post.MyPostFragment;
 import com.faadev.ceria.utils.Preferences;
 import com.faadev.ceria.utils.SlidingRootNavBuilder;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.tabs.TabLayout;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -105,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             navigateDrawer(new SaldoFragment(), "saldo", true);
         });
         postingan.setOnClickListener(v -> {
-            navigateDrawer(new NotificationsFragment(), "post", true);
+            navigateDrawer(new MyPostFragment(), "post", true);
         });
         notifikasi.setOnClickListener(v -> {
 //            navigateDrawer();

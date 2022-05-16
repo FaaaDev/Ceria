@@ -19,6 +19,7 @@ import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.MyCoinResponse;
+import com.faadev.ceria.http.response.MyPostResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PaymentProfileResponse;
 import com.faadev.ceria.http.response.PostResponse;
@@ -205,4 +206,10 @@ public class ApiService {
         Call<WithdrawIdResponse> wd = apiInterface.getWithdrawId(token, id);
         wd.enqueue(callback);
     }
+
+    public void getMyPost(Callback<MyPostResponse> callback) {
+        Call<MyPostResponse> post = apiInterface.getMyPost(token);
+        post.enqueue(callback);
+    }
+
 }
