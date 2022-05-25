@@ -27,15 +27,16 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:src="@drawable/ic__error"
-                    android:scaleType="centerCrop"/>
+                    android:src="@drawable/ic_omg"
+                    android:layout_marginTop="20dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dosis_bold"
                     android:text="Ooops.."
                     android:textColor="@color/fontColor"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:layout_marginTop="20dp"/>
                 <TextView
                     android:id="@+id/messages"
                     android:layout_width="wrap_content"
@@ -45,7 +46,8 @@
                     android:textColor="@color/fontColor"
                     android:textSize="18sp"
                     android:layout_marginBottom="30dp"
-                    android:layout_marginHorizontal="25dp"/>
+                    android:layout_marginHorizontal="25dp"
+                    android:gravity="center"/>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btn_action"

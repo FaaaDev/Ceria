@@ -2,7 +2,10 @@ package com.faadev.ceria.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
+import java.util.List;
+
+public class User implements Serializable {
     @SerializedName("id")
     private int id;
     @SerializedName("email")
@@ -13,6 +16,10 @@ public class User {
     private String role;
     @SerializedName("image")
     private String image;
+    @SerializedName("monetized")
+    private boolean monetized;
+    @SerializedName("posts")
+    private List<Post> post;
 
     public int getId() {
         return id;
@@ -52,5 +59,21 @@ public class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public boolean isMonetized() {
+        return monetized;
+    }
+
+    public void setMonetized(boolean monetized) {
+        this.monetized = monetized;
+    }
+
+    public List<Post> getPost() {
+        return post;
+    }
+
+    public void setPost(List<Post> post) {
+        this.post = post;
     }
 }

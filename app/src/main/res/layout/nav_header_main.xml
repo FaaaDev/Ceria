@@ -22,12 +22,14 @@
         android:paddingTop="120dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/profile_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="-35dp"
             android:layout_marginEnd="25dp"
             app:cardCornerRadius="35dp"
-            app:cardElevation="0dp">
+            app:cardElevation="0dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,6 +48,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
@@ -56,6 +59,7 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
@@ -72,6 +76,7 @@
                     app:cardCornerRadius="28dp">
 
                     <ImageView
+                        android:id="@+id/profile_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"

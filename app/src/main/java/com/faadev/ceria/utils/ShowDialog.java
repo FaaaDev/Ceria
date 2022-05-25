@@ -34,4 +34,12 @@ public class ShowDialog {
         CancelConfirmationFragment cancel = new CancelConfirmationFragment();
         cancel.show(fragmentManager, cancel.getTag());
     }
+
+    public static void showConfirmCancel(FragmentManager fragmentManager, String messages) {
+        CancelConfirmationFragment cancel = new CancelConfirmationFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("msg", messages);
+        cancel.setArguments(bundle);
+        cancel.show(fragmentManager, cancel.getTag());
+    }
 }

@@ -27,8 +27,10 @@ import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.model.CategoryModel;
+import com.faadev.ceria.model.MyPost;
 import com.faadev.ceria.screen.fragment.CategoryFragment;
 import com.faadev.ceria.utils.DismissListener;
+import com.faadev.ceria.utils.GlideApp;
 import com.faadev.ceria.utils.ShowDialog;
 
 import java.io.File;
@@ -51,7 +53,9 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
     private CategoryModel categoryModel = new CategoryModel();
     private String cameraFilePath;
     private Uri uri;
-    private int categoryId;
+    private int categoryId = -1;
+    private MyPost post;
+    private boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,8 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
             main.setSystemUiVisibility(flags);
             this.getWindow().setStatusBarColor(Color.argb(255, 0, 0, 23));
         }
+
+        post = (MyPost) getIntent().getSerializableExtra("data");
         apiService = new ApiService(this);
         implement();
     }
@@ -81,6 +87,19 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
 
     @SuppressLint("ClickableViewAccessibility")
     private void implement() {
+        if (post != null) {
+            binding.headerTittle.setText("Edit Postingan");
+            binding.tittle.setText(post.getTittle());
+            binding.category.setText(post.getCategory().getCategory());
+            binding.content.setText(post.getArticle());
+            GlideApp.with(this)
+                    .load(post.getIllustration())
+                    .into(binding.illustration);
+            binding.noImage.setVisibility(View.GONE);
+            binding.illustration.setVisibility(View.VISIBLE);
+            isEdit = true;
+            categoryId = post.getCategory().getId();
+        }
         getCategory();
         binding.content.setOnTouchListener((v, event) -> {
             if (binding.content.hasFocus()) {
@@ -94,7 +113,11 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
         });
 
         binding.btnAction.setOnClickListener(v -> {
-            addPost();
+            if (isEdit) {
+                ShowDialog.showConfirmCancel(getSupportFragmentManager(), "Kalo diedit postinganmu butuh peninjauan lagi lhoo..");
+            } else {
+                addPost();
+            }
         });
 
         binding.category.setOnClickListener(v -> {
@@ -125,6 +148,15 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 if (response.isSuccessful()) {
                     categoryModelList = response.body().getData();
+                    if(categoryId != -1) {
+                        for (int i = 0; i < categoryModelList.size(); i++) {
+                            if (categoryModelList.get(i).getId() == categoryId) {
+                                categoryModel = categoryModelList.get(i);
+                                categoryModel.setSelected(true);
+                                binding.category.setText(categoryModel.getCategory());
+                            }
+                        }
+                    }
                 } else {
                     ShowDialog.showError(getSupportFragmentManager(), response.code(), "Error " + response.code() + "-Gagal medapatkan data");
                 }
@@ -135,6 +167,41 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
                 ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
             }
         });
+    }
+
+    private void editPost() {
+        binding.btnAction.setEnabled(false);
+        setLoading(true);
+        apiService.editPost(
+                post.getId(),
+                binding.tittle.getText().toString(),
+                binding.content.getText().toString(),
+                uri,
+                categoryId,
+                new Callback<GeneralResponse>() {
+                    @Override
+                    public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                        System.out.println(response.isSuccessful());
+                        System.out.println(response.code());
+                        if (response.body().getCode() == 200) {
+                            Toast.makeText(getApplicationContext(), "Postingan berhasil diperbarui!", Toast.LENGTH_LONG).show();
+                            finish();
+                        } else {
+                            ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal memperbarui postingan");
+                        }
+                        binding.btnAction.setEnabled(true);
+                        setLoading(false);
+                    }
+
+                    @Override
+                    public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                        System.out.println(t.toString());
+                        ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+                        binding.btnAction.setEnabled(true);
+                        setLoading(false);
+                    }
+                }
+        );
     }
 
     private void addPost() {
@@ -273,6 +340,8 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
                         binding.category.setText(categoryModel.getCategory());
                     }
                 }
+            } else if (from.equals("confirmcancel")) {
+                editPost();
             }
         }
     }

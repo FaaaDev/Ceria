@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".screen.activity.ProfileDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".screen.activity.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".screen.activity.DetailMyPostActivity"
             android:exported="false" />
         <activity

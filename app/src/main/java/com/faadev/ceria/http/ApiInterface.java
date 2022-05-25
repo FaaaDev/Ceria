@@ -6,10 +6,12 @@ import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.MyCoinResponse;
+import com.faadev.ceria.http.response.MyPostIdResponse;
 import com.faadev.ceria.http.response.MyPostResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PaymentProfileResponse;
 import com.faadev.ceria.http.response.PostResponse;
+import com.faadev.ceria.http.response.ProfileIdResponse;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
 import com.faadev.ceria.http.response.PurchaseResponse;
 import com.faadev.ceria.http.response.RateResponse;
@@ -116,8 +118,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("withdraw")
     Call<GeneralResponse> withdrawRequest(@Header("x-access-token") String token,
-                                         @Field("profile_id") int profile,
-                                         @Field("coin_affected") int coin);
+                                          @Field("profile_id") int profile,
+                                          @Field("coin_affected") int coin);
 
     @GET("withdraw/{withdraw_id}")
     Call<WithdrawIdResponse> getWithdrawId(@Header("x-access-token") String token,
@@ -125,4 +127,37 @@ public interface ApiInterface {
 
     @GET("post")
     Call<MyPostResponse> getMyPost(@Header("x-access-token") String token);
+
+    @FormUrlEncoded
+    @PUT("post/{post_id}")
+    Call<GeneralResponse> editPost(@Path(value = "post_id") int post_id,
+                                   @Header("x-access-token") String token,
+                                   @Field("tittle") String tittle,
+                                   @Field("article") String article,
+                                   @Field("illustration") String illustration,
+                                   @Field("category") int category,
+                                   @Field("approve") int approve);
+
+    @FormUrlEncoded
+    @PUT("post/{post_id}")
+    Call<GeneralResponse> editPostNoImage(@Path(value = "post_id") int post_id,
+                                          @Header("x-access-token") String token,
+                                          @Field("tittle") String tittle,
+                                          @Field("article") String article,
+                                          @Field("category") int category,
+                                          @Field("approve") int approve);
+
+    @GET("post/{post_id}")
+    Call<MyPostIdResponse> getMyPostId(@Header("x-access-token") String token,
+                                       @Path(value = "post_id") int post_id);
+
+    @FormUrlEncoded
+    @PUT("post/{post_id}")
+    Call<GeneralResponse> setMonetized(@Path(value = "post_id") int post_id,
+                                       @Header("x-access-token") String token,
+                                       @Field("monetized") Boolean monetized);
+
+    @GET("user/{user_id}")
+    Call<ProfileIdResponse> getUserId(@Header("x-access-token") String token,
+                                      @Path(value = "user_id") int user_id);
 }

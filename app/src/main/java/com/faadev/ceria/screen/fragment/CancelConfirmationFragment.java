@@ -49,6 +49,12 @@ public class CancelConfirmationFragment extends BottomSheetDialogFragment {
         binding.btnCancel.setOnClickListener(v -> {
             dismiss();
         });
+
+        if (getArguments() != null) {
+            if (getArguments().getString("msg") != null) {
+                binding.messages.setText(getArguments().getString("msg"));
+            }
+        }
     }
 
     @Override

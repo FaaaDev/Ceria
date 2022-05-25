@@ -15,6 +15,7 @@ import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.model.Post;
 import com.faadev.ceria.utils.GlideApp;
+import com.faadev.ceria.utils.Preferences;
 import com.faadev.ceria.utils.ShowDialog;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -76,6 +77,9 @@ public class DetailPostActivity extends AppCompatActivity {
                     .load(post.getIllustration())
                     .into(binding.imageContent);
             setLiked(post.isLiked());
+            if (post.getUserId() != Preferences.getId(getApplicationContext())) {
+                binding.includedLayout.actionContainer.setVisibility(View.VISIBLE);
+            }
         }
 
         binding.includedLayout.btnReward.setOnClickListener(v -> {});

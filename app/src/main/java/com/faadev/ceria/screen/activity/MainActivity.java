@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.faadev.ceria.R;
+import com.faadev.ceria.screen.ui.notification.NotificationFragment;
+import com.faadev.ceria.screen.ui.profile.ProfileFragment;
 import com.faadev.ceria.screen.ui.saldoku.SaldoFragment;
 import com.faadev.ceria.screen.ui.home.HomeFragment;
 import com.faadev.ceria.screen.ui.my_post.MyPostFragment;
+import com.faadev.ceria.screen.ui.settings.SettingsFragment;
 import com.faadev.ceria.utils.Preferences;
 import com.faadev.ceria.utils.SlidingRootNavBuilder;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
@@ -23,13 +27,14 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
 
-    private CardView menu;
+    private CardView menu, edit;
     private SlidingRootNav sliding;
-    private CardView home, saldo, postingan, notifikasi, pengaturan, dark_mode, logout;
+    private CardView home, saldo, postingan, notifikasi, pengaturan, dark_mode, logout, profileInfo, profileImageContainer;
     private boolean isDark = false;
     private ImageView dark_toggle;
     private FragmentTransaction ft;
     private String currentFragment = "home";
+    private TextView username, email;
 
 
     @Override
@@ -80,13 +85,35 @@ public class MainActivity extends AppCompatActivity {
         dark_mode = findViewById(R.id.dark_mode);
         logout = findViewById(R.id.logout);
         dark_toggle = findViewById(R.id.dark_toggle);
+        profileInfo = findViewById(R.id.profile_info);
+        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
+        profileImageContainer = findViewById(R.id.profile_image_container);
+        edit = findViewById(R.id.edit_btn);
     }
 
     private void _prep() {
+        if (Preferences.isLogedIn(getApplicationContext())) {
+            profileInfo.setVisibility(View.VISIBLE);
+            username.setText(Preferences.getUsername(getApplicationContext()));
+            email.setText(Preferences.getEmail(getApplicationContext()));
+        } else {
+            profileInfo.setVisibility(View.GONE);
+        }
+
         menu.setOnClickListener(view -> {
             sliding.openMenu();
         });
+        edit.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
+        });
+        profileImageContainer.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), ProfileDetailActivity.class));
+        });
 
+        profileInfo.setOnClickListener(v -> {
+            navigateDrawer(new ProfileFragment(), "profile", true);
+        });
         home.setOnClickListener(v -> {
             navigateDrawer(new HomeFragment(), "home", false);
         });
@@ -97,10 +124,10 @@ public class MainActivity extends AppCompatActivity {
             navigateDrawer(new MyPostFragment(), "post", true);
         });
         notifikasi.setOnClickListener(v -> {
-//            navigateDrawer();
+            navigateDrawer(new NotificationFragment(), "notification", false);
         });
         pengaturan.setOnClickListener(v -> {
-//            navigateDrawer();
+            navigateDrawer(new SettingsFragment(), "settings", true);
         });
         dark_mode.setOnClickListener(v -> {
             isDark = !isDark;
@@ -152,5 +179,19 @@ public class MainActivity extends AppCompatActivity {
                 }, 100);
             }
         }
+
+        if (currentFragment.equals("profile")){
+            profileImageContainer.setVisibility(View.GONE);
+            edit.setVisibility(View.VISIBLE);
+        } else {
+            profileImageContainer.setVisibility(View.VISIBLE);
+            edit.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        _prep();
     }
 }

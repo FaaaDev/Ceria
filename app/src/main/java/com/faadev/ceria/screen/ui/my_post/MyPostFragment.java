@@ -82,6 +82,7 @@ public class MyPostFragment extends Fragment {
     }
 
     private void getMyPost() {
+        apiService = new ApiService(getContext());
         listApprove = new ArrayList<>();
         listWaiting = new ArrayList<>();
         listReject = new ArrayList<>();

@@ -73,6 +73,7 @@
         <entry key="app/src/main/res/drawable/ic_brilogo.xml" value="0.188" />
         <entry key="app/src/main/res/drawable/ic_calendar.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_cancel.xml" value="0.16" />
+        <entry key="app/src/main/res/drawable/ic_cancel_ilustration.xml" value="0.15" />
         <entry key="app/src/main/res/drawable/ic_card_bg.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_card_bg2.xml" value="0.145" />
         <entry key="app/src/main/res/drawable/ic_confirm.xml" value="0.16" />
@@ -83,9 +84,14 @@
         <entry key="app/src/main/res/drawable/ic_moon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_reject.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_round_arrow_back_24.xml" value="0.1585" />
+        <entry key="app/src/main/res/drawable/ic_round_camera_alt_24.xml" value="0.1585" />
+        <entry key="app/src/main/res/drawable/ic_round_camera_alt_24_white.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_round_category_24.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_round_content_copy_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_round_dashboard_24.xml" value="0.1095" />
+        <entry key="app/src/main/res/drawable/ic_round_drive_file_rename_outline_24.xml" value="0.15" />
+        <entry key="app/src/main/res/drawable/ic_round_edit_24.xml" value="0.15" />
         <entry key="app/src/main/res/drawable/ic_round_error_24.xml" value="0.1565" />
         <entry key="app/src/main/res/drawable/ic_round_monetization_on_green.xml" value="0.16" />
         <entry key="app/src/main/res/drawable/ic_round_monetization_on_grey.xml" value="0.16" />
@@ -114,8 +120,10 @@
         <entry key="app/src/main/res/layout/activity_detail_my_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_post.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_payment_confirmation.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_profile_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_withdraw.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/bottom_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_cancel_confirmation.xml" value="0.2079533941236069" />
@@ -129,9 +137,14 @@
         <entry key="app/src/main/res/layout/fragment_list_wating_post.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.20108695652173914" />
         <entry key="app/src/main/res/layout/fragment_my_post.xml" value="0.2079533941236069" />
+        <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.2011144883485309" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/fragment_payment_profile.xml" value="0.20697463768115942" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_saldo.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.2011144883485309" />
+        <entry key="app/src/main/res/layout/fragment_terbaru.xml" value="0.2079533941236069" />
+        <entry key="app/src/main/res/layout/horizontal_card_layout.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/item_bank.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/item_category_vertical.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/item_nominal.xml" value="0.21875" />

@@ -8,7 +8,7 @@ public class MyPost implements Serializable {
     @SerializedName("id")
     private int id;
     @SerializedName("user_id")
-    private int userId;
+    private User user;
     @SerializedName("category_id")
     private CategoryModel category;
     @SerializedName("tittle")
@@ -34,12 +34,12 @@ public class MyPost implements Serializable {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public CategoryModel getCategory() {

@@ -19,10 +19,12 @@ import com.faadev.ceria.http.response.BankResponse;
 import com.faadev.ceria.http.response.CategoryResponse;
 import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.MyCoinResponse;
+import com.faadev.ceria.http.response.MyPostIdResponse;
 import com.faadev.ceria.http.response.MyPostResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PaymentProfileResponse;
 import com.faadev.ceria.http.response.PostResponse;
+import com.faadev.ceria.http.response.ProfileIdResponse;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
 import com.faadev.ceria.http.response.PurchaseResponse;
 import com.faadev.ceria.http.response.RateResponse;
@@ -210,6 +212,44 @@ public class ApiService {
     public void getMyPost(Callback<MyPostResponse> callback) {
         Call<MyPostResponse> post = apiInterface.getMyPost(token);
         post.enqueue(callback);
+    }
+
+    public void editPost(int id, String tittle, String article, Uri illustration, int category, Callback<GeneralResponse> callback) {
+
+        if (illustration != null) {
+            uploadImage(illustration, new Callback<GeneralResponse>() {
+                @Override
+                public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                    if (response.isSuccessful()) {
+                        Call<GeneralResponse> post = apiInterface.editPost(id, token, tittle, article, response.body().getMessage(), category, 0);
+                        post.enqueue(callback);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                    ShowDialog.showError(((FragmentActivity) context).getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+                }
+            });
+        } else {
+            Call<GeneralResponse> post = apiInterface.editPost(id, token, tittle, article, null, category, 0);
+            post.enqueue(callback);
+        }
+    }
+
+    public void getMyPostId(int id, Callback<MyPostIdResponse> callback) {
+        Call<MyPostIdResponse> post = apiInterface.getMyPostId(token, id);
+        post.enqueue(callback);
+    }
+
+    public void setMonetized(int id, Boolean monetized, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> post = apiInterface.setMonetized(id, token, monetized);
+        post.enqueue(callback);
+    }
+
+    public void getUserId(int id, Callback<ProfileIdResponse> callback) {
+        Call<ProfileIdResponse> profile = apiInterface.getUserId(token, id);
+        profile.enqueue(callback);
     }
 
 }
