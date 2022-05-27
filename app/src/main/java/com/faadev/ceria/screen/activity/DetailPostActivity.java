@@ -3,6 +3,7 @@ package com.faadev.ceria.screen.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -113,6 +114,12 @@ public class DetailPostActivity extends AppCompatActivity {
 
         binding.backBtn.setOnClickListener(v -> {
             onBackPressed();
+        });
+
+        binding.includedLayout.profileInfo.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), ProfileDetailActivity.class);
+            intent.putExtra("profile_id", post.getUserId());
+            startActivity(intent);
         });
     }
 

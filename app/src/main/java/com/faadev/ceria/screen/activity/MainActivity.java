@@ -108,7 +108,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
         });
         profileImageContainer.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), ProfileDetailActivity.class));
+            if (Preferences.isLogedIn(getApplicationContext())) {
+                startActivity(new Intent(getApplicationContext(), ProfileDetailActivity.class));
+            } else {
+                startActivity(new Intent(this, AuthActivity.class));
+            }
         });
 
         profileInfo.setOnClickListener(v -> {

@@ -1,18 +1,38 @@
 package com.faadev.ceria.screen.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
 import com.faadev.ceria.R;
+import com.faadev.ceria.adapter.CardAdapter;
 import com.faadev.ceria.databinding.ActivityProfileDetailBinding;
+import com.faadev.ceria.http.ApiService;
+import com.faadev.ceria.http.response.ProfileIdResponse;
+import com.faadev.ceria.model.Post;
+import com.faadev.ceria.utils.Preferences;
+import com.faadev.ceria.utils.ShowDialog;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileDetailActivity extends AppCompatActivity {
 
     private ActivityProfileDetailBinding binding;
+    private ApiService apiService;
+    private CardAdapter cra1;
+    private List<Post> postList;
+    private int profile_id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +51,61 @@ public class ProfileDetailActivity extends AppCompatActivity {
             main.setSystemUiVisibility(flags);
             this.getWindow().setStatusBarColor(Color.WHITE);
         }
+
+        profile_id = getIntent().getIntExtra("profile_id", 0);
+
+        System.out.println(profile_id);
+        implement();
+    }
+
+    private void implement() {
+        binding.backBtn.setOnClickListener(v -> onBackPressed());
+        binding.editBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void getProfile() {
+        apiService = new ApiService(getApplicationContext());
+        postList = new ArrayList<>();
+        apiService.getUserId(profile_id == 0 ? Preferences.getId(getApplicationContext()) : profile_id, new Callback<ProfileIdResponse>() {
+            @Override
+            public void onResponse(Call<ProfileIdResponse> call, Response<ProfileIdResponse> response) {
+                if (response.body().getCode() == 200){
+                    postList = response.body().getData().getPost();
+                    cra1 = new CardAdapter(getApplicationContext(), postList);
+                    binding.includedLayout.rvContent1.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
+                    binding.includedLayout.rvContent1.setAdapter(cra1);
+                    binding.includedLayout.username.setText(response.body().getData().getName());
+                    binding.includedLayout.email.setText(response.body().getData().getEmail());
+                    binding.includedLayout.postCount.setText(response.body().getData().getPost().size()+"");
+                    if (response.body().getData().getId() == Preferences.getId(getApplicationContext())) {
+                        binding.editBtn.setVisibility(View.VISIBLE);
+                    }
+                    if (postList.size() > 0) {
+                        binding.includedLayout.rvContent1.setVisibility(View.VISIBLE);
+                        binding.includedLayout.emptyData.setVisibility(View.GONE);
+                    } else {
+                        binding.includedLayout.rvContent1.setVisibility(View.GONE);
+                        binding.includedLayout.emptyData.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileIdResponse> call, Throwable t) {
+                System.out.println(t.getMessage());
+                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getProfile();
     }
 }

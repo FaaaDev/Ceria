@@ -56,6 +56,13 @@ public class ProfileFragment extends Fragment {
                     binding.username.setText(response.body().getData().getName());
                     binding.email.setText(response.body().getData().getEmail());
                     binding.postCount.setText(response.body().getData().getPost().size()+"");
+                    if (postList.size() > 0) {
+                        binding.rvContent1.setVisibility(View.VISIBLE);
+                        binding.emptyData.setVisibility(View.GONE);
+                    } else {
+                        binding.rvContent1.setVisibility(View.GONE);
+                        binding.emptyData.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     ShowDialog.showError(getChildFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
                 }

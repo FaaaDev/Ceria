@@ -50,6 +50,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             if (Preferences.isLogedIn(mContext)){
                 Intent intent = new Intent(mContext, DetailPostActivity.class);
                 intent.putExtra("data", data);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             } else {
                 mContext.startActivity(new Intent(mContext, AuthActivity.class));
