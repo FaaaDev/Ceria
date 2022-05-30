@@ -9,6 +9,11 @@ public class UserData {
     @SerializedName("token")
     private String token;
 
+    public UserData(User user, String token) {
+        this.user = user;
+        this.token = token;
+    }
+
     public User getUser() {
         return user;
     }

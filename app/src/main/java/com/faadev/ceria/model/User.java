@@ -16,10 +16,21 @@ public class User implements Serializable {
     private String role;
     @SerializedName("image")
     private String image;
+    @SerializedName("followed")
+    private boolean followed;
     @SerializedName("monetized")
     private boolean monetized;
     @SerializedName("posts")
     private List<Post> post;
+
+    public User(int id, String email, String name, String role, String image, boolean monetized) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.role = role;
+        this.image = image;
+        this.monetized = monetized;
+    }
 
     public int getId() {
         return id;
@@ -75,5 +86,13 @@ public class User implements Serializable {
 
     public void setPost(List<Post> post) {
         this.post = post;
+    }
+
+    public boolean isFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(boolean followed) {
+        this.followed = followed;
     }
 }

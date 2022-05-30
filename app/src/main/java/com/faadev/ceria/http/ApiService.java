@@ -252,4 +252,35 @@ public class ApiService {
         profile.enqueue(callback);
     }
 
+    public void editProfile(int id, String name, String old_password, String password, Uri illustration, boolean monetize, Callback<ProfileIdResponse> callback) {
+
+        if (illustration != null) {
+            uploadImage(illustration, new Callback<GeneralResponse>() {
+                @Override
+                public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                    if (response.isSuccessful()) {
+                        Call<ProfileIdResponse> profile = apiInterface.editProfile(id, token, name, old_password, password, response.body().getMessage(), monetize);
+                        profile.enqueue(callback);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                    ShowDialog.showError(((FragmentActivity) context).getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+                }
+            });
+        } else {
+            Call<ProfileIdResponse> profile = apiInterface.editProfile(id, token, name, old_password, password, null, monetize);
+            profile.enqueue(callback);
+        }
+    }
 }
+
+
+
+
+
+
+
+
+

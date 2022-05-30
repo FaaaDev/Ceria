@@ -23,6 +23,10 @@ public class Post implements Serializable {
     private int approve;
     @SerializedName("liked")
     boolean isLiked;
+    @SerializedName("followed")
+    boolean followed;
+    @SerializedName("likes")
+    int likes;
     @SerializedName("writer")
     private String writer;
     @SerializedName("profile_photo")
@@ -117,5 +121,21 @@ public class Post implements Serializable {
 
     public void setProfile(String profile) {
         this.profile = profile;
+    }
+
+    public boolean isFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(boolean followed) {
+        this.followed = followed;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 }

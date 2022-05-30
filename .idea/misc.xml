@@ -120,7 +120,7 @@
         <entry key="app/src/main/res/layout/activity_detail_my_post.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail_post.xml" value="0.17755825734549138" />
         <entry key="app/src/main/res/layout/activity_detail_transaction.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_payment_confirmation.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_profile_detail.xml" value="0.25" />
