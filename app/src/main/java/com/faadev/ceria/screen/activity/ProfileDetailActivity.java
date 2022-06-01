@@ -100,6 +100,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
                                 .load(user.getImage())
                                 .into(binding.includedLayout.profileImage);
                     }
+                    binding.includedLayout.follower.setText(user.getFollowers()+"");
                 } else {
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
                 }

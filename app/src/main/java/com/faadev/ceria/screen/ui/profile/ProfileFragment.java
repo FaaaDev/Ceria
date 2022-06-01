@@ -69,6 +69,7 @@ public class ProfileFragment extends Fragment {
                                 .load(response.body().getData().getImage())
                                 .into(binding.profileImage);
                     }
+                    binding.follower.setText(response.body().getData().getFollowers()+"");
                 } else {
                     ShowDialog.showError(getChildFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
                 }

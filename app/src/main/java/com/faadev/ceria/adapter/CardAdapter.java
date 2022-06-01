@@ -80,6 +80,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         Glide.with(mContext)
                 .load(data.getIllustration())
                 .into(holder.binding.illustration);
+
+        holder.binding.like.setText(data.getLikes()+"");
     }
 
     @Override

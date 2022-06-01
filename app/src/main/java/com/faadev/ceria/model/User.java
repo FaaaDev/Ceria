@@ -20,6 +20,8 @@ public class User implements Serializable {
     private boolean followed;
     @SerializedName("monetized")
     private boolean monetized;
+    @SerializedName("followers")
+    private int followers;
     @SerializedName("posts")
     private List<Post> post;
 
@@ -94,5 +96,13 @@ public class User implements Serializable {
 
     public void setFollowed(boolean followed) {
         this.followed = followed;
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
     }
 }

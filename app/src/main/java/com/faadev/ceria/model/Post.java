@@ -31,6 +31,8 @@ public class Post implements Serializable {
     private String writer;
     @SerializedName("profile_photo")
     private String profile;
+    @SerializedName("followers")
+    int followers;
 
     public Post() {
     }
@@ -137,5 +139,13 @@ public class Post implements Serializable {
 
     public void setLikes(int likes) {
         this.likes = likes;
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
     }
 }
