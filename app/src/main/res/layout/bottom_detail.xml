@@ -78,6 +78,7 @@
                         app:cardElevation="0dp"
                         android:layout_marginEnd="10dp">
                         <ImageView
+                            android:id="@+id/profile_photo"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:src="@drawable/stock1"
@@ -199,7 +200,7 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingHorizontal="25dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btn_reward"
@@ -208,7 +209,8 @@
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             app:cardCornerRadius="10dp"
-            app:cardElevation="0dp">
+            app:cardElevation="0dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -229,6 +231,44 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/dosis_bold"
                     android:text="Hadiah"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?android:attr/selectableItemBackground"
+                tools:targetApi="lollipop" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_follow"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#4545F3"
+                android:gravity="center_horizontal|center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_round_group_add_24" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dosis_bold"
+                    android:text="Ikuti"
                     android:textColor="#ffffff"
                     android:textSize="18sp" />
             </LinearLayout>

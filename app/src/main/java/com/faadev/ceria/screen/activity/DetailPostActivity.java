@@ -81,6 +81,11 @@ public class DetailPostActivity extends AppCompatActivity {
             if (post.getUserId() != Preferences.getId(getApplicationContext())) {
                 binding.includedLayout.actionContainer.setVisibility(View.VISIBLE);
             }
+            binding.includedLayout.like.setText(post.getLikes()+"");
+            GlideApp.with(this)
+                    .load(post.getProfile())
+                    .into(binding.includedLayout.profilePhoto);
+            binding.includedLayout.follower.setText(post.getFollowers()+"");
         }
 
         binding.includedLayout.btnReward.setOnClickListener(v -> {});
@@ -141,6 +146,8 @@ public class DetailPostActivity extends AppCompatActivity {
                 if (response.body().getCode() == 200){
                     binding.includedLayout.btnLike.setEnabled(true);
                     setLiked(true);
+                    post.setLikes(post.getLikes()+1);
+                    binding.includedLayout.like.setText(post.getLikes()+"");
                 } else {
                     binding.includedLayout.btnLike.setEnabled(true);
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");
@@ -163,6 +170,8 @@ public class DetailPostActivity extends AppCompatActivity {
                 if (response.body().getCode() == 200){
                     binding.includedLayout.btnLike.setEnabled(true);
                     setLiked(false);
+                    post.setLikes(post.getLikes()-1);
+                    binding.includedLayout.like.setText(post.getLikes()+"");
                 } else {
                     binding.includedLayout.btnLike.setEnabled(true);
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");

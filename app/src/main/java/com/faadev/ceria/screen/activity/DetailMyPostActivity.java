@@ -55,9 +55,9 @@ public class DetailMyPostActivity extends AppCompatActivity {
     private void implement() {
         binding.monetize.setOnClickListener(v -> {
             if (post.getUser().isMonetized()) {
-                updateMonetize();
                 post.setMonetized(!post.isMonetized());
                 setMonetize(post.isMonetized());
+                updateMonetize();
             } else {
                 ShowDialog.showError(getSupportFragmentManager(), 0, "Sepertinya akunmu belum memenuhi syarat monetisasi, coba lagi nanti yaa..");
             }

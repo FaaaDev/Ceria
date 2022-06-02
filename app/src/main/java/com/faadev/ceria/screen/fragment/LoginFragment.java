@@ -66,9 +66,9 @@ public class LoginFragment extends Fragment {
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                 System.out.println("onSuccess ======= "+response.code());
 
-                if (response.isSuccessful()){
+                if (response.body().getCode() == 200){
                     preferences.saveUser(response.body().getData(), getContext());
-                    System.out.println("onSuccess ======= "+response.body().getMessage());
+                    System.out.println("onSuccess ======= "+response.body().getData().getToken());
                     Objects.requireNonNull(getActivity()).finish();
                 } else {
                     ShowDialog.showError(getChildFragmentManager(), response.code(), "User atau email yang kamu masukkan salah");

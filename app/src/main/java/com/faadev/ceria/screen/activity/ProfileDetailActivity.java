@@ -16,6 +16,8 @@ import com.faadev.ceria.databinding.ActivityProfileDetailBinding;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.ProfileIdResponse;
 import com.faadev.ceria.model.Post;
+import com.faadev.ceria.model.User;
+import com.faadev.ceria.utils.GlideApp;
 import com.faadev.ceria.utils.Preferences;
 import com.faadev.ceria.utils.ShowDialog;
 
@@ -33,6 +35,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
     private CardAdapter cra1;
     private List<Post> postList;
     private int profile_id = 0;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
         binding.backBtn.setOnClickListener(v -> onBackPressed());
         binding.editBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
+            intent.putExtra("data", user);
             startActivity(intent);
         });
     }
@@ -90,6 +94,13 @@ public class ProfileDetailActivity extends AppCompatActivity {
                         binding.includedLayout.rvContent1.setVisibility(View.GONE);
                         binding.includedLayout.emptyData.setVisibility(View.VISIBLE);
                     }
+                    user = response.body().getData();
+                    if (user.getImage() != null) {
+                        GlideApp.with(getApplicationContext())
+                                .load(user.getImage())
+                                .into(binding.includedLayout.profileImage);
+                    }
+                    binding.includedLayout.follower.setText(user.getFollowers()+"");
                 } else {
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
                 }

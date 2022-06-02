@@ -160,4 +160,14 @@ public interface ApiInterface {
     @GET("user/{user_id}")
     Call<ProfileIdResponse> getUserId(@Header("x-access-token") String token,
                                       @Path(value = "user_id") int user_id);
+
+    @FormUrlEncoded
+    @PUT("user/{user_id}")
+    Call<ProfileIdResponse> editProfile(@Path(value = "user_id") int user_id,
+                                      @Header("x-access-token") String token,
+                                      @Field("name") String name,
+                                      @Field("old_password") String old_password,
+                                      @Field("password") String password,
+                                      @Field("image") String image,
+                                      @Field("monetized") Boolean monetized);
 }

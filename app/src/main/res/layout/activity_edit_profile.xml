@@ -105,7 +105,7 @@
                             android:layout_centerInParent="true"
                             android:layout_margin="1dp"
                             app:cardCornerRadius="75dp"
-                            app:cardElevation="0dp">
+                            app:cardElevation="2dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -156,7 +156,7 @@
                         android:layout_marginHorizontal="30dp">
 
                         <EditText
-                            android:id="@+id/tittle"
+                            android:id="@+id/username"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="12dp"
@@ -184,16 +184,15 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginHorizontal="30dp">
 
-                        <TextView
+                        <EditText
                             android:id="@+id/old_pass"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="12dp"
                             android:background="@drawable/layouting"
                             android:fontFamily="@font/dosis_regular"
-                            android:gravity="center_vertical"
                             android:hint="Password Lama"
-                            android:inputType="text"
+                            android:inputType="textPassword"
                             android:textSize="16sp" />
 
                         <TextView
@@ -214,16 +213,15 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginHorizontal="30dp">
 
-                        <TextView
+                        <EditText
                             android:id="@+id/new_pass"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginTop="12dp"
                             android:background="@drawable/layouting"
                             android:fontFamily="@font/dosis_regular"
-                            android:gravity="center_vertical"
                             android:hint="Password Baru"
-                            android:inputType="text"
+                            android:inputType="textPassword"
                             android:textSize="16sp" />
 
                         <TextView

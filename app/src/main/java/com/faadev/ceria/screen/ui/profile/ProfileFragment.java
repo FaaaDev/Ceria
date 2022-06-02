@@ -17,6 +17,7 @@ import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.http.response.ProfileIdResponse;
 import com.faadev.ceria.model.Post;
+import com.faadev.ceria.utils.GlideApp;
 import com.faadev.ceria.utils.Preferences;
 import com.faadev.ceria.utils.ShowDialog;
 
@@ -63,6 +64,12 @@ public class ProfileFragment extends Fragment {
                         binding.rvContent1.setVisibility(View.GONE);
                         binding.emptyData.setVisibility(View.VISIBLE);
                     }
+                    if (response.body().getData().getImage() != null) {
+                        GlideApp.with(getContext())
+                                .load(response.body().getData().getImage())
+                                .into(binding.profileImage);
+                    }
+                    binding.follower.setText(response.body().getData().getFollowers()+"");
                 } else {
                     ShowDialog.showError(getChildFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
                 }
