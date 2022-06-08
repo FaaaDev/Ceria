@@ -34,6 +34,17 @@ public class Post implements Serializable {
     @SerializedName("followers")
     int followers;
 
+    public boolean isMonetized() {
+        return monetized;
+    }
+
+    public void setMonetized(boolean monetized) {
+        this.monetized = monetized;
+    }
+
+    @SerializedName("monetized")
+    boolean monetized;
+
     public Post() {
     }
 

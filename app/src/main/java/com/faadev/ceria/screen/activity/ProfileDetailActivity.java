@@ -14,6 +14,7 @@ import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.CardAdapter;
 import com.faadev.ceria.databinding.ActivityProfileDetailBinding;
 import com.faadev.ceria.http.ApiService;
+import com.faadev.ceria.http.response.GeneralResponse;
 import com.faadev.ceria.http.response.ProfileIdResponse;
 import com.faadev.ceria.model.Post;
 import com.faadev.ceria.model.User;
@@ -70,6 +71,22 @@ public class ProfileDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void setFollow(boolean isFollowed) {
+        if (isFollowed) {
+            binding.includedLayout.followLabel.setText("Mengikuti");
+            binding.includedLayout.followIcon.setImageResource(R.drawable.ic_round_group_24_black);
+            binding.includedLayout.btnFollow.setOnClickListener(v -> {
+                unFollowUser();
+            });
+        } else {
+            binding.includedLayout.followLabel.setText("Ikuti");
+            binding.includedLayout.followIcon.setImageResource(R.drawable.ic_round_group_add_24_black);
+            binding.includedLayout.btnFollow.setOnClickListener(v -> {
+                followUser();
+            });
+        }
+    }
+
     private void getProfile() {
         apiService = new ApiService(getApplicationContext());
         postList = new ArrayList<>();
@@ -86,6 +103,8 @@ public class ProfileDetailActivity extends AppCompatActivity {
                     binding.includedLayout.postCount.setText(response.body().getData().getPost().size()+"");
                     if (response.body().getData().getId() == Preferences.getId(getApplicationContext())) {
                         binding.editBtn.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.includedLayout.btnFollow.setVisibility(View.VISIBLE);
                     }
                     if (postList.size() > 0) {
                         binding.includedLayout.rvContent1.setVisibility(View.VISIBLE);
@@ -101,6 +120,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
                                 .into(binding.includedLayout.profileImage);
                     }
                     binding.includedLayout.follower.setText(user.getFollowers()+"");
+                    setFollow(user.isFollowed());
                 } else {
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
                 }
@@ -109,6 +129,50 @@ public class ProfileDetailActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ProfileIdResponse> call, Throwable t) {
                 System.out.println(t.getMessage());
+                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
+    private void followUser() {
+        binding.includedLayout.btnFollow.setEnabled(false);
+        apiService.followUser(profile_id, new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.body().getCode() == 200) {
+                    getProfile();
+                    binding.includedLayout.btnFollow.setEnabled(true);
+                } else {
+                    binding.includedLayout.btnFollow.setEnabled(true);
+                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal mengikuti penulis");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                binding.includedLayout.btnFollow.setEnabled(true);
+                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
+    private void unFollowUser() {
+        binding.includedLayout.btnFollow.setEnabled(false);
+        apiService.unfollowUser(profile_id, new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.body().getCode() == 200) {
+                    getProfile();
+                    binding.includedLayout.btnFollow.setEnabled(true);
+                } else {
+                    binding.includedLayout.btnFollow.setEnabled(true);
+                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal mengikuti penulis");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                binding.includedLayout.btnFollow.setEnabled(true);
                 ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
             }
         });

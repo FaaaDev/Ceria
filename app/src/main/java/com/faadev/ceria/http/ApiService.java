@@ -23,6 +23,7 @@ import com.faadev.ceria.http.response.MyPostIdResponse;
 import com.faadev.ceria.http.response.MyPostResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PaymentProfileResponse;
+import com.faadev.ceria.http.response.PostDetailResponse;
 import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.http.response.ProfileIdResponse;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
@@ -97,8 +98,14 @@ public class ApiService {
         getAllPost.enqueue(callback);
     }
 
+
     public void getAllPostWithId(int id, Callback<PostResponse> callback) {
         Call<PostResponse> getAllPost = apiInterface.getAllPost(id);
+        getAllPost.enqueue(callback);
+    }
+
+    public void getAllPostDetailId(int id, int postId, Callback<PostDetailResponse> callback) {
+        Call<PostDetailResponse> getAllPost = apiInterface.getPostDetail(id, postId);
         getAllPost.enqueue(callback);
     }
 
@@ -273,6 +280,16 @@ public class ApiService {
             Call<ProfileIdResponse> profile = apiInterface.editProfile(id, token, name, old_password, password, null, monetize);
             profile.enqueue(callback);
         }
+    }
+
+    public void followUser(int userId, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> follow = apiInterface.followUser(token, userId);
+        follow.enqueue(callback);
+    }
+
+    public void unfollowUser(int userId, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> follow = apiInterface.unfollowUser(token, userId);
+        follow.enqueue(callback);
     }
 }
 

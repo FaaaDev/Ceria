@@ -10,6 +10,7 @@ import com.faadev.ceria.http.response.MyPostIdResponse;
 import com.faadev.ceria.http.response.MyPostResponse;
 import com.faadev.ceria.http.response.MyPurchaseResponse;
 import com.faadev.ceria.http.response.PaymentProfileResponse;
+import com.faadev.ceria.http.response.PostDetailResponse;
 import com.faadev.ceria.http.response.PostResponse;
 import com.faadev.ceria.http.response.ProfileIdResponse;
 import com.faadev.ceria.http.response.PurchaseIdResponse;
@@ -58,6 +59,9 @@ public interface ApiInterface {
 
     @GET("all-post/{user_id}")
     Call<PostResponse> getAllPost(@Path(value = "user_id") int id);
+
+    @GET("all-post/{post_id}/{user_id}")
+    Call<PostDetailResponse> getPostDetail(@Path(value = "user_id") int id, @Path(value = "post_id") int postId);
 
     @POST("like/{post_id}")
     Call<GeneralResponse> likePost(@Header("x-access-token") String token,
@@ -170,4 +174,12 @@ public interface ApiInterface {
                                       @Field("password") String password,
                                       @Field("image") String image,
                                       @Field("monetized") Boolean monetized);
+
+    @POST("follow/{user_id}")
+    Call<GeneralResponse> followUser(@Header("x-access-token") String token,
+                                     @Path(value = "user_id") int userId);
+
+    @DELETE("follow/{user_id}")
+    Call<GeneralResponse> unfollowUser(@Header("x-access-token") String token,
+                                     @Path(value = "user_id") int userId);
 }

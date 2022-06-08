@@ -14,7 +14,10 @@ import com.faadev.ceria.databinding.ActivityDetailPostBinding;
 import com.faadev.ceria.databinding.BottomDetailBinding;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.GeneralResponse;
+import com.faadev.ceria.http.response.PostDetailResponse;
 import com.faadev.ceria.model.Post;
+import com.faadev.ceria.screen.fragment.SelectRewardFragment;
+import com.faadev.ceria.utils.DismissListener;
 import com.faadev.ceria.utils.GlideApp;
 import com.faadev.ceria.utils.Preferences;
 import com.faadev.ceria.utils.ShowDialog;
@@ -24,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailPostActivity extends AppCompatActivity {
+public class DetailPostActivity extends AppCompatActivity implements DismissListener {
 
     private ActivityDetailPostBinding binding;
     private BottomDetailBinding bottom;
@@ -65,11 +68,12 @@ public class DetailPostActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         apiService = new ApiService(this);
+        getDetailPost();
     }
 
-    private void implement(){
+    private void implement() {
 //        bottom = BottomDetailBinding.inflate(getLayoutInflater());
-        if (post != null){
+        if (post != null) {
             binding.includedLayout.tittle.setText(post.getTittle());
             binding.includedLayout.secondaryTittle.setText(post.getTittle());
             binding.includedLayout.content.setText(post.getArticle());
@@ -78,31 +82,42 @@ public class DetailPostActivity extends AppCompatActivity {
                     .load(post.getIllustration())
                     .into(binding.imageContent);
             setLiked(post.isLiked());
+            setFollowed(post.isFollowed());
             if (post.getUserId() != Preferences.getId(getApplicationContext())) {
                 binding.includedLayout.actionContainer.setVisibility(View.VISIBLE);
             }
-            binding.includedLayout.like.setText(post.getLikes()+"");
+            binding.includedLayout.like.setText(post.getLikes() + "");
             GlideApp.with(this)
                     .load(post.getProfile())
                     .into(binding.includedLayout.profilePhoto);
-            binding.includedLayout.follower.setText(post.getFollowers()+"");
+            binding.includedLayout.follower.setText(post.getFollowers() + "");
+            binding.includedLayout.btnReward.setEnabled(post.isMonetized());
         }
 
-        binding.includedLayout.btnReward.setOnClickListener(v -> {});
+        binding.includedLayout.btnReward.setOnClickListener(v -> {
+            SelectRewardFragment selectRewardFragment = new SelectRewardFragment();
+            selectRewardFragment.show(getSupportFragmentManager(), selectRewardFragment.getTag());
+        });
         binding.includedLayout.btnLike.setOnClickListener(v -> {
-            if (post.isLiked()){
+            if (post.isLiked()) {
                 unlikePost();
             } else {
                 likePost();
             }
         });
-        binding.includedLayout.btnBookmark.setOnClickListener(v -> {});
+
+        binding.includedLayout.btnFollow.setOnClickListener(v -> {
+            followUser();
+        });
+
+        binding.includedLayout.btnBookmark.setOnClickListener(v -> {
+        });
 
         BottomSheetBehavior<View> bottomSheetBehavior = BottomSheetBehavior.from(binding.includedLayout.getRoot());
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View view, int i) {
-                if (i == 4 ){
+                if (i == 4) {
                     binding.includedLayout.tittle.setVisibility(View.VISIBLE);
                     binding.includedLayout.secondaryTittle.setVisibility(View.GONE);
                 } else {
@@ -128,7 +143,7 @@ public class DetailPostActivity extends AppCompatActivity {
         });
     }
 
-    private void setLiked(boolean isLiked){
+    private void setLiked(boolean isLiked) {
         if (isLiked) {
             binding.includedLayout.iconLike.setImageResource(R.drawable.ic_round_favorite_white);
             post.setLiked(true);
@@ -138,16 +153,27 @@ public class DetailPostActivity extends AppCompatActivity {
         }
     }
 
-    private void likePost(){
+    private void setFollowed(boolean isFollowed) {
+        if (isFollowed) {
+            binding.includedLayout.btnFollow.setVisibility(View.GONE);
+            binding.includedLayout.btnReward.setVisibility(View.VISIBLE);
+        } else {
+            binding.includedLayout.btnFollow.setVisibility(View.VISIBLE);
+            binding.includedLayout.btnReward.setVisibility(View.GONE);
+        }
+    }
+
+    private void likePost() {
         binding.includedLayout.btnLike.setEnabled(false);
         apiService.likePost(post.getId(), new Callback<GeneralResponse>() {
             @Override
             public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-                if (response.body().getCode() == 200){
+                if (response.body().getCode() == 200) {
                     binding.includedLayout.btnLike.setEnabled(true);
                     setLiked(true);
-                    post.setLikes(post.getLikes()+1);
-                    binding.includedLayout.like.setText(post.getLikes()+"");
+                    post.setLikes(post.getLikes() + 1);
+                    binding.includedLayout.like.setText(post.getLikes() + "");
+                    getDetailPost();
                 } else {
                     binding.includedLayout.btnLike.setEnabled(true);
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");
@@ -162,16 +188,17 @@ public class DetailPostActivity extends AppCompatActivity {
         });
     }
 
-    private void unlikePost(){
+    private void unlikePost() {
         binding.includedLayout.btnLike.setEnabled(false);
         apiService.unlikePost(post.getId(), new Callback<GeneralResponse>() {
             @Override
             public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
-                if (response.body().getCode() == 200){
+                if (response.body().getCode() == 200) {
                     binding.includedLayout.btnLike.setEnabled(true);
                     setLiked(false);
-                    post.setLikes(post.getLikes()-1);
-                    binding.includedLayout.like.setText(post.getLikes()+"");
+                    post.setLikes(post.getLikes() - 1);
+                    binding.includedLayout.like.setText(post.getLikes() + "");
+                    getDetailPost();
                 } else {
                     binding.includedLayout.btnLike.setEnabled(true);
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal menambah ke daftar disukai");
@@ -184,5 +211,68 @@ public class DetailPostActivity extends AppCompatActivity {
                 ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
             }
         });
+    }
+
+    private void followUser() {
+        binding.includedLayout.btnFollow.setEnabled(false);
+        apiService.followUser(post.getUserId(), new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.body().getCode() == 200) {
+                    binding.includedLayout.btnFollow.setEnabled(true);
+                    setFollowed(true);
+                    post.setFollowers(post.getFollowers() + 1);
+                    binding.includedLayout.follower.setText(post.getFollowers() + "");
+                } else {
+                    binding.includedLayout.btnFollow.setEnabled(true);
+                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.body().getCode() + "-Gagal mengikuti penulis");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                binding.includedLayout.btnFollow.setEnabled(true);
+                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
+    private void getDetailPost() {
+        apiService.getAllPostDetailId(Preferences.getId(getApplicationContext()), post.getId(), new Callback<PostDetailResponse>() {
+            @Override
+            public void onResponse(Call<PostDetailResponse> call, Response<PostDetailResponse> response) {
+                if (response.body().getCode() == 200) {
+                    post = response.body().getData();
+                    binding.includedLayout.tittle.setText(post.getTittle());
+                    binding.includedLayout.secondaryTittle.setText(post.getTittle());
+                    binding.includedLayout.content.setText(post.getArticle());
+                    binding.includedLayout.writer.setText(post.getWriter());
+                    GlideApp.with(getApplicationContext())
+                            .load(post.getIllustration())
+                            .into(binding.imageContent);
+                    setLiked(post.isLiked());
+                    setFollowed(post.isFollowed());
+//                    if (post.getUserId() != Preferences.getId(getApplicationContext())) {
+//                        binding.includedLayout.actionContainer.setVisibility(View.VISIBLE);
+//                    }
+                    binding.includedLayout.like.setText(post.getLikes() + "");
+                    GlideApp.with(getApplicationContext())
+                            .load(post.getProfile())
+                            .into(binding.includedLayout.profilePhoto);
+                    binding.includedLayout.follower.setText(post.getFollowers() + "");
+                    binding.includedLayout.btnReward.setEnabled(post.isMonetized());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PostDetailResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onDismissSheet(String from) {
+
     }
 }
