@@ -39,23 +39,28 @@ public class SelectRewardFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.coffee.setOnClickListener(v -> {
-
+            from = "1";
+            dismiss();
         });
 
         binding.bungkus.setOnClickListener(v -> {
-
+            from = "2";
+            dismiss();
         });
 
         binding.padang.setOnClickListener(v -> {
-
+            from = "3";
+            dismiss();
         });
 
         binding.sate.setOnClickListener(v -> {
-
+            from = "4";
+            dismiss();
         });
 
         binding.steak.setOnClickListener(v -> {
-
+            from = "5";
+            dismiss();
         });
     }
 

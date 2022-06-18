@@ -291,6 +291,11 @@ public class ApiService {
         Call<GeneralResponse> follow = apiInterface.unfollowUser(token, userId);
         follow.enqueue(callback);
     }
+
+    public void giveReward(int post_id, int type, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> reward = apiInterface.giveReward(token, post_id, type);
+        reward.enqueue(callback);
+    }
 }
 
 

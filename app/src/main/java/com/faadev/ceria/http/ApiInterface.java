@@ -168,12 +168,12 @@ public interface ApiInterface {
     @FormUrlEncoded
     @PUT("user/{user_id}")
     Call<ProfileIdResponse> editProfile(@Path(value = "user_id") int user_id,
-                                      @Header("x-access-token") String token,
-                                      @Field("name") String name,
-                                      @Field("old_password") String old_password,
-                                      @Field("password") String password,
-                                      @Field("image") String image,
-                                      @Field("monetized") Boolean monetized);
+                                        @Header("x-access-token") String token,
+                                        @Field("name") String name,
+                                        @Field("old_password") String old_password,
+                                        @Field("password") String password,
+                                        @Field("image") String image,
+                                        @Field("monetized") Boolean monetized);
 
     @POST("follow/{user_id}")
     Call<GeneralResponse> followUser(@Header("x-access-token") String token,
@@ -181,5 +181,11 @@ public interface ApiInterface {
 
     @DELETE("follow/{user_id}")
     Call<GeneralResponse> unfollowUser(@Header("x-access-token") String token,
-                                     @Path(value = "user_id") int userId);
+                                       @Path(value = "user_id") int userId);
+
+    @FormUrlEncoded
+    @POST("give-reward")
+    Call<GeneralResponse> giveReward(@Header("x-access-token") String token,
+                                     @Field("post_id") int post_id,
+                                     @Field("type") int type);
 }

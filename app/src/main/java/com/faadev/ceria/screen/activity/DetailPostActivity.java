@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.databinding.ActivityDetailPostBinding;
@@ -271,8 +272,39 @@ public class DetailPostActivity extends AppCompatActivity implements DismissList
         });
     }
 
+    private void giveReward(int type) {
+        String reward = "";
+        if (type == 1) {
+            reward = "kopi";
+        } else if ( type == 2 ) {
+            reward = "nasi bungkus";
+        } else if ( type == 3 ) {
+            reward = "nasi padang";
+        } else if ( type == 4 ) {
+            reward = "sate";
+        } else {
+            reward = "steak";
+        }
+        String finalReward = reward;
+        apiService.giveReward(post.getId(), type, new Callback<GeneralResponse>() {
+            @Override
+            public void onResponse(Call<GeneralResponse> call, Response<GeneralResponse> response) {
+                if (response.body().getCode() == 200) {
+                    Toast.makeText(getApplicationContext(), "Terimakasih "+ finalReward +" nya, penulis pasti seneng banget niih..", Toast.LENGTH_LONG).show();
+                } else {
+                    ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Coin mu gak cukup nih");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GeneralResponse> call, Throwable t) {
+                ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
+            }
+        });
+    }
+
     @Override
     public void onDismissSheet(String from) {
-
+        giveReward(Integer.parseInt(from));
     }
 }
