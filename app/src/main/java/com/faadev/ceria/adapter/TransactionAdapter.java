@@ -47,10 +47,17 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         if (data.getType().equals("b")) {
             holder.binding.type.setText("Isi Ulang");
             holder.binding.status.setImageResource(R.drawable.ic_add_color);
-        } else {
+        } else if (data.getType().equals("s")) {
             holder.binding.type.setText("Penarikan");
             holder.binding.status.setImageResource(R.drawable.ic_minus);
             holder.binding.coinAffected.setTextColor(Color.parseColor("#ff0000"));
+        } else if (data.getType().equals("r") && data.getCoinAffected().contains("-")) {
+            holder.binding.type.setText("Reward");
+            holder.binding.status.setImageResource(R.drawable.ic_minus);
+            holder.binding.coinAffected.setTextColor(Color.parseColor("#ff0000"));
+        } else if (data.getType().equals("r") && data.getCoinAffected().contains("+")) {
+            holder.binding.type.setText("Reward");
+            holder.binding.status.setImageResource(R.drawable.ic_add_color);
         }
 
         try {
@@ -82,9 +89,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.binding.coinAffected.setText(data.getCoinAffected()+" Coin");
 
         holder.binding.item.setOnClickListener(v -> {
-            Intent intent = new Intent(mContext, DetailTransactionActivity.class);
-            intent.putExtra("data", data);
-            mContext.startActivity(intent);
+            if (!data.getType().equals("r")) {
+                Intent intent = new Intent(mContext, DetailTransactionActivity.class);
+                intent.putExtra("data", data);
+                mContext.startActivity(intent);
+            }
         });
     }
 

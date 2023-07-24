@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.TabAdapter;
@@ -47,6 +48,10 @@ public class AuthActivity extends AppCompatActivity {
         binding.vp.setAdapter(adapter);
         binding.tab.setupWithViewPager(binding.vp);
         binding.close.setOnClickListener(v -> {
+            if(getCurrentFocus()!=null) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
             finish();
         });
     }

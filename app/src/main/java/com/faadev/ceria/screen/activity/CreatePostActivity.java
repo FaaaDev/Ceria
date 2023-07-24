@@ -19,6 +19,8 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.faadev.ceria.R;
@@ -128,7 +130,13 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
             categoryFragment.show(getSupportFragmentManager(), categoryFragment.getTag());
         });
 
-        binding.close.setOnClickListener(v -> finish());
+        binding.close.setOnClickListener(v -> {
+            if(getCurrentFocus()!=null) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            }
+            finish();
+        });
 
         binding.pickImage.setOnClickListener(v -> ShowDialog.showPicker(getSupportFragmentManager()));
     }

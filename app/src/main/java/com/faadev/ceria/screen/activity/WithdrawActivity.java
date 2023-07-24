@@ -131,7 +131,7 @@ public class WithdrawActivity extends AppCompatActivity implements DismissListen
             @Override
             public void afterTextChanged(Editable editable) {
                 if (!TextUtils.isEmpty(editable)) {
-                    String cleanString = editable.toString().replace(".", "");
+                    String cleanString = editable.toString().replace(",", "").replace(".", "");
                     totalIdr = Integer.parseInt(cleanString);
                     String formatted = intToIdr(totalIdr);
                     binding.idr.removeTextChangedListener(this);
@@ -178,16 +178,7 @@ public class WithdrawActivity extends AppCompatActivity implements DismissListen
     }
 
     private String intToIdr(int value) {
-        DecimalFormat purchase = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-        DecimalFormatSymbols total = new DecimalFormatSymbols();
-
-        total.setCurrencySymbol("");
-        total.setMonetaryDecimalSeparator(',');
-        total.setGroupingSeparator('.');
-
-        purchase.setDecimalFormatSymbols(total);
-
-        return purchase.format(value).replace(",00", "");
+        return String.format("%,d", value).replaceAll(",", ".");
     }
 
     @Override

@@ -6,6 +6,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import com.faadev.ceria.screen.ui.saldoku.SaldoFragment;
 import com.faadev.ceria.screen.ui.home.HomeFragment;
 import com.faadev.ceria.screen.ui.my_post.MyPostFragment;
 import com.faadev.ceria.screen.ui.settings.SettingsFragment;
+import com.faadev.ceria.utils.DismissListener;
 import com.faadev.ceria.utils.GlideApp;
 import com.faadev.ceria.utils.Preferences;
 import com.faadev.ceria.utils.ShowDialog;
@@ -39,7 +42,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DismissListener {
 
     private CardView menu, edit;
     private SlidingRootNav sliding;
@@ -169,7 +172,13 @@ public class MainActivity extends AppCompatActivity {
             }, 500);
         });
         logout.setOnClickListener(v -> {
-
+            if (Preferences.isLogedIn(getApplicationContext())) {
+                Handler hh1 = new Handler();
+                hh1.postDelayed(() -> {
+                    sliding.closeMenu();
+                    ShowDialog.showConfirmCancel(getSupportFragmentManager(), "Yakin mau keluar ?");
+                }, 100);
+            }
         });
     }
 
@@ -180,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 hh1.postDelayed(() -> {
                     sliding.closeMenu();
                 }, 100);
-                if(!currentFragment.equals(tag)) {
+                if (!currentFragment.equals(tag)) {
                     currentFragment = tag;
                     ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.main_frame, fragment);
@@ -201,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
             hh1.postDelayed(() -> {
                 sliding.closeMenu();
             }, 100);
-            if(!currentFragment.equals(tag)) {
+            if (!currentFragment.equals(tag)) {
                 currentFragment = tag;
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.main_frame, fragment);
@@ -212,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (currentFragment.equals("profile")){
+        if (currentFragment.equals("profile")) {
             profileImageContainer.setVisibility(View.GONE);
             edit.setVisibility(View.VISIBLE);
             getProfile();
@@ -225,6 +234,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if (getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
         _prep();
     }
 
@@ -233,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
         apiService.getUserId(Preferences.getId(getApplicationContext()), new Callback<ProfileIdResponse>() {
             @Override
             public void onResponse(Call<ProfileIdResponse> call, Response<ProfileIdResponse> response) {
-                if (response.body().getCode() == 200){
+                if (response.body().getCode() == 200) {
                     user = response.body().getData();
                 } else {
                     ShowDialog.showError(getSupportFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
@@ -246,5 +259,12 @@ public class MainActivity extends AppCompatActivity {
                 ShowDialog.showError(getSupportFragmentManager(), 500, "Server lagi bermasalah nih, coba lagi nanti yaa..");
             }
         });
+    }
+
+    @Override
+    public void onDismissSheet(String from) {
+        if (from.equals("confirmcancel")) {
+            Preferences.clearLoggedInUser(getApplicationContext());
+        }
     }
 }

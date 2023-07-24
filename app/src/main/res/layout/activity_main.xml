@@ -63,7 +63,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="35dp"
-            app:cardCornerRadius="21dp"
+            app:cardCornerRadius="18dp"
             android:visibility="visible">
 
             <ImageView

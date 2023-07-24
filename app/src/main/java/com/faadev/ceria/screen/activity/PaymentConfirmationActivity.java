@@ -199,16 +199,7 @@ public class PaymentConfirmationActivity extends AppCompatActivity implements Di
     }
 
     private String intToIdr(int value) {
-        DecimalFormat purchase = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-        DecimalFormatSymbols total = new DecimalFormatSymbols();
-
-        total.setCurrencySymbol("IDR ");
-        total.setMonetaryDecimalSeparator(',');
-        total.setGroupingSeparator('.');
-
-        purchase.setDecimalFormatSymbols(total);
-
-        return purchase.format(value).replace(",00", "");
+        return "IDR "+String.format("%,d", value).replaceAll(",", ".");
     }
 
     private void pickFromCamera() {
