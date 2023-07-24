@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
@@ -305,6 +306,8 @@ public class DetailPostActivity extends AppCompatActivity implements DismissList
 
     @Override
     public void onDismissSheet(String from) {
-        giveReward(Integer.parseInt(from));
+        if (!TextUtils.isEmpty(from)) {
+            giveReward(Integer.parseInt(from));
+        }
     }
 }
