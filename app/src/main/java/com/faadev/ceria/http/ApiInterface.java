@@ -38,6 +38,12 @@ public interface ApiInterface {
     Call<AuthResponse> goAuth(@Field("email") String email,
                               @Field("password") String password);
 
+    @FormUrlEncoded
+    @POST("register")
+    Call<GeneralResponse> register(@Field("name") String name,
+                                   @Field("email") String email,
+                                   @Field("password") String password);
+
     @GET("category")
     Call<CategoryResponse> getCategory();
 

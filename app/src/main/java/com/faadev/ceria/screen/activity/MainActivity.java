@@ -115,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements DismissListener {
 
     private void _prep() {
         if (Preferences.isLogedIn(getApplicationContext())) {
+            logout.setVisibility(View.VISIBLE);
             profileInfo.setVisibility(View.VISIBLE);
             username.setText(Preferences.getUsername(getApplicationContext()));
             email.setText(Preferences.getEmail(getApplicationContext()));
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements DismissListener {
                         .into(profile_image_small);
             }
         } else {
+            logout.setVisibility(View.GONE);
             profileInfo.setVisibility(View.GONE);
         }
 
@@ -265,6 +267,8 @@ public class MainActivity extends AppCompatActivity implements DismissListener {
     public void onDismissSheet(String from) {
         if (from.equals("confirmcancel")) {
             Preferences.clearLoggedInUser(getApplicationContext());
+            logout.setVisibility(View.GONE);
+            profileInfo.setVisibility(View.GONE);
         }
     }
 }

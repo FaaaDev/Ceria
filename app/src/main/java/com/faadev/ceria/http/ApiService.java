@@ -70,6 +70,11 @@ public class ApiService {
         auth.enqueue(callback);
     }
 
+    public void register(String name, String email, String password, Callback<GeneralResponse> callback) {
+        Call<GeneralResponse> auth = apiInterface.register(name, email, password);
+        auth.enqueue(callback);
+    }
+
     public void getCategory(Callback<CategoryResponse> callback) {
         Call<CategoryResponse> category = apiInterface.getCategory();
         category.enqueue(callback);

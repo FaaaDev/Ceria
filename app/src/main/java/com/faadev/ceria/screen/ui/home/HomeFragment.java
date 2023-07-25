@@ -57,7 +57,8 @@ public class HomeFragment extends Fragment {
         binding.tab.setupWithViewPager(binding.included.vp);
 
         cmod = new ArrayList<>();
-        cmod.add(new CategoryModel("Cerpen", true));
+        cmod.add(new CategoryModel("Semua", true));
+        cmod.add(new CategoryModel("Cerpen", false));
         cmod.add(new CategoryModel("Novel", false));
         cmod.add(new CategoryModel("Puisi", false));
         cmod.add(new CategoryModel("Fabel", false));

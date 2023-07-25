@@ -56,4 +56,8 @@ public class AuthActivity extends AppCompatActivity {
         });
     }
 
+    public ActivityAuthBinding getBinding() {
+        return binding;
+    }
+
 }
