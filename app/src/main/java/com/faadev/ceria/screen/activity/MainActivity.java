@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.CardAdapter;
+import com.faadev.ceria.adapter.SharedViewModel;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.ProfileIdResponse;
 import com.faadev.ceria.model.User;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements DismissListener {
     private TextView username, email;
     private ApiService apiService;
     private User user;
+    private SharedViewModel sharedViewModel;
 
 
     @Override
@@ -270,5 +272,9 @@ public class MainActivity extends AppCompatActivity implements DismissListener {
             logout.setVisibility(View.GONE);
             profileInfo.setVisibility(View.GONE);
         }
+    }
+
+    public SharedViewModel getSharedViewModel() {
+        return sharedViewModel;
     }
 }

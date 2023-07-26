@@ -5,16 +5,17 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.faadev.ceria.R;
 import com.faadev.ceria.adapter.CardAdapter;
+import com.faadev.ceria.adapter.SharedViewModel;
 import com.faadev.ceria.databinding.FragmentTerbaruBinding;
 import com.faadev.ceria.http.ApiService;
 import com.faadev.ceria.http.response.PostResponse;
@@ -34,11 +35,13 @@ public class TerbaruFragment extends Fragment {
     private CardAdapter cra1;
     private List<Post> postList;
     private ApiService apiService = new ApiService();
+    private SharedViewModel sharedViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentTerbaruBinding.inflate(inflater, container, false);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         return binding.getRoot();
     }
@@ -46,6 +49,13 @@ public class TerbaruFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        sharedViewModel.getRefreshData().observe(getViewLifecycleOwner(), isRefreshing -> {
+            if (isRefreshing) {
+                System.out.println("refresh start");
+                getPost();
+            }
+        });
     }
 
     private void getPost(){
@@ -58,12 +68,13 @@ public class TerbaruFragment extends Fragment {
                     cra1 = new CardAdapter(getContext(), postList);
                     binding.rvContent1.setLayoutManager(new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL));
                     binding.rvContent1.setAdapter(cra1);
+                    sharedViewModel.doneRefreshing();
                 }
             }
 
             @Override
             public void onFailure(Call<PostResponse> call, Throwable t) {
-
+                sharedViewModel.doneRefreshing();
             }
         };
         if (Preferences.isLogedIn(getContext())){

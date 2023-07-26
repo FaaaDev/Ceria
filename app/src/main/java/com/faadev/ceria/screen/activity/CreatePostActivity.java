@@ -156,15 +156,18 @@ public class CreatePostActivity extends AppCompatActivity implements DismissList
             public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 if (response.isSuccessful()) {
                     categoryModelList = response.body().getData();
-                    if(categoryId != -1) {
-                        for (int i = 0; i < categoryModelList.size(); i++) {
-                            if (categoryModelList.get(i).getId() == categoryId) {
-                                categoryModel = categoryModelList.get(i);
-                                categoryModel.setSelected(true);
-                                binding.category.setText(categoryModel.getCategory());
+                    if (categoryModelList!= null) {
+                        if(categoryId != -1) {
+                            for (int i = 0; i < categoryModelList.size(); i++) {
+                                if (categoryModelList.get(i).getId() == categoryId) {
+                                    categoryModel = categoryModelList.get(i);
+                                    categoryModel.setSelected(true);
+                                    binding.category.setText(categoryModel.getCategory());
+                                }
                             }
                         }
                     }
+
                 } else {
                     ShowDialog.showError(getSupportFragmentManager(), response.code(), "Error " + response.code() + "-Gagal medapatkan data");
                 }

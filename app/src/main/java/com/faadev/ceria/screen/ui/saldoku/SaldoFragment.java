@@ -65,6 +65,8 @@ public class SaldoFragment extends Fragment {
         binding.topup.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), DepositActivity.class));
         });
+
+        binding.refresh.setOnRefreshListener(this::getRate);
     }
 
     @Override
@@ -94,9 +96,11 @@ public class SaldoFragment extends Fragment {
                     adapter = new TransactionAdapter(getContext(), purchaseDataList);
                     binding.rvTransaction.setAdapter(adapter);
                     hasData(purchaseDataList.size() > 0);
+                    binding.refresh.setRefreshing(false);
                 } else {
                     ShowDialog.showError(getChildFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
                     hasData(false);
+                    binding.refresh.setRefreshing(false);
                 }
             }
 
@@ -120,6 +124,7 @@ public class SaldoFragment extends Fragment {
                     binding.estimate.setText(intToIdr(response.body().getData().getTotal()*sellRate));
                     getHistory();
                 } else {
+                    binding.refresh.setRefreshing(false);
                     ShowDialog.showError(getChildFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
                 }
             }
@@ -141,6 +146,7 @@ public class SaldoFragment extends Fragment {
                     getCoin();
                 } else {
                     ShowDialog.showError(getChildFragmentManager(), response.body().getCode(), "Error " + response.code() + "-Gagal medapatkan data");
+                    binding.refresh.setRefreshing(false);
                 }
             }
 
@@ -150,19 +156,6 @@ public class SaldoFragment extends Fragment {
             }
         });
     }
-
-//    private String intToIdr(int value) {
-//        DecimalFormat purchase = (DecimalFormat) DecimalFormat.getCurrencyInstance();
-//        DecimalFormatSymbols total = new DecimalFormatSymbols();
-//
-//        total.setCurrencySymbol("IDR ");
-//        total.setMonetaryDecimalSeparator(',');
-//        total.setGroupingSeparator('.');
-//
-//        purchase.setDecimalFormatSymbols(total);
-//
-//        return purchase.format(value).replace(",00", "");
-//    }
 
     private String intToIdr(int value) {
         return "IDR "+String.format("%,d", value).replaceAll(",", ".");
